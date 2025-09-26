@@ -16,4 +16,8 @@ class ListFaqs extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
 }
