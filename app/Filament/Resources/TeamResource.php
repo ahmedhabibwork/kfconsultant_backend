@@ -2,14 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\BannerResource\Pages;
-use App\Filament\Resources\BannerResource\RelationManagers;
-use App\Models\Banner;
+use App\Filament\Resources\TeamResource\Pages;
+use App\Filament\Resources\TeamResource\RelationManagers;
+use App\Models\Team;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -19,46 +16,61 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BannerResource extends Resource
+class TeamResource extends Resource
 {
-    protected static ?string $model = Banner::class;
+    protected static ?string $model = Team::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    // protected static bool $shouldRegisterNavigation = false;
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Clients');
+    }
+
     public static function getNavigationLabel(): string
     {
-        return __('Banners');
+        return __('Clients');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Banners');
+        return __('Clients');
     }
 
     public static function getModelLabel(): string
     {
-        return __('Banner');
+        return __('Client');
     }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('title')
-                    ->required()
-                    ->label(__('Title')),
+                Forms\Components\TextInput::make('name')
+                    ->label(__('Name'))
+                    ->required(),
+                Forms\Components\TextInput::make('job_title')
+                    ->label(__('Job Title'))
+                    ->required(),
+
+                // RichEditor::make('description.en')
+                //     ->label(__('Description') . ' (' . __('English') . ')')
+                //     ->required(),
+
+                // RichEditor::make('description.ar')
+                //     ->label(__('Description') . ' (' . __('Arabic') . ')')
+                //     ->required(),
 
                 FileUpload::make('image')
                     ->label(__('Image'))
                     ->image()
-                    ->directory('banners')
+                    ->directory('clients')
                     ->disk('public')
                     ->visibility('public')
                     ->required()
                     ->imagePreviewHeight('100'),
 
-                RichEditor::make('description')
-                    ->required()
-                    ->label(__('Description')),
+
             ]);
     }
 
@@ -69,9 +81,10 @@ class BannerResource extends Resource
                 TextColumn::make('id')
                     ->sortable()
                     ->label(__('ID')),
-                TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
+                TextColumn::make('name')->label(__('Name'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
-                ImageColumn::make('image')->label('Image')->circular()->width(50)->height(50),
+                ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
+
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
                     ->dateTime('d M, Y H:i:s')
@@ -102,9 +115,9 @@ class BannerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListBanners::route('/'),
-            'create' => Pages\CreateBanner::route('/create'),
-            'edit' => Pages\EditBanner::route('/{record}/edit'),
+            'index' => Pages\ListTeams::route('/'),
+            'create' => Pages\CreateTeam::route('/create'),
+            'edit' => Pages\EditTeam::route('/{record}/edit'),
         ];
     }
 }

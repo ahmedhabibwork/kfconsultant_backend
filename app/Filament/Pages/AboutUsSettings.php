@@ -100,6 +100,7 @@ class AboutUsSettings extends Page implements HasForms
                             ->disk('public')
                             ->visibility('public')
                             ->required()
+                            ->multiple()
                             ->imagePreviewHeight('100'),
 
                     ]),

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use App\Models\Society;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BannerResource extends JsonResource
+class TeamResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,11 +18,9 @@ class BannerResource extends JsonResource
         return [
 
             'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'images' => $this->image ? array_map(function ($image) {
-                return url('storage/' . $image);
-            }, $this->image) : [],
+            'name' => $this->name,
+            'job_title' => $this->job_title,
+            'image' => $this->image ? url('storage/' . $this->image) : null,
             'created_at' => $this->created_at,
         ];
     }

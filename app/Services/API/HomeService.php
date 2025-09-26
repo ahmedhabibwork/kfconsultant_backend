@@ -20,6 +20,7 @@ use App\Http\Resources\RangeResource;
 use App\Http\Resources\ReviewResource;
 use App\Http\Resources\ReviewStandardResource;
 use App\Http\Resources\ServiceResource;
+use App\Http\Resources\TeamResource;
 use App\Http\Resources\TripResource;
 use App\Http\Resources\WhyUsResource;
 use App\Models\AboutUs;
@@ -35,6 +36,7 @@ use App\Models\Point;
 use App\Models\Range;
 use App\Models\Review;
 use App\Models\ReviewStandard;
+use App\Models\Team;
 use App\Models\Trip;
 use App\Models\WhyUs;
 use App\Traits\ResponseTrait;
@@ -105,7 +107,10 @@ class HomeService
         try {
             return $this->okResponse(
                 __('Returned Range Details successfully.'),
-                new AboutUsResource(AboutUs::first())
+                [
+                    'about_us' => new AboutUsResource(AboutUs::first()),
+                    'team' => TeamResource::collection(Team::all()),
+                ]
             );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());

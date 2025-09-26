@@ -9,15 +9,18 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Spatie\Translatable\HasTranslations;
 use Spatie\Activitylog\Traits\LogsActivity;
+
 class Banner extends Model
 {
-       use HasFactory,  SoftDeletes;
+    use HasFactory,  SoftDeletes;
 
-//    public $translatable = ['title','description'];
+    //    public $translatable = ['title','description'];
+    protected $casts = [
+        'image' => 'array',
+    ];
     protected $fillable = [
         'title',
         'description',
         'image'
     ];
-
 }
