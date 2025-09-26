@@ -22,7 +22,9 @@ class AboutUsResource extends JsonResource
             'short_description' => $this->short_description,
             'description' => $this->description,
             'experience_years' => $this->experience_years,
-            'image' => $this->image ? url('storage/' . $this->image) : null,
+            'images' => $this->image ? array_map(function ($image) {
+                return url('storage/' . $image);
+            }, $this->image) : [],
             'created_at' => $this->created_at,
         ];
     }
