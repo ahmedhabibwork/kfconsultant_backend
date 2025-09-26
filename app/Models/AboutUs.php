@@ -20,7 +20,6 @@ class AboutUs extends Model
         'experience_years',
 
     ];
-    
     protected $casts = [
         'image' => 'string',
     ];

@@ -25,7 +25,6 @@ class AboutUsSettings extends Page implements HasForms
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
     protected static string $view = 'filament.pages.about-us-settings';
     protected static ?string $navigationLabel = 'About Us';
-  //  protected static bool $shouldRegisterNavigation = false;
 
     // protected static ?string $title = 'About Us Settings';
     public ?AboutUs $about;
