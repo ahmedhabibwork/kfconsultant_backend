@@ -81,6 +81,7 @@ class TripService
             );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
+            dd($exception);
             return $this->exceptionFailed($exception);
         }
     }
