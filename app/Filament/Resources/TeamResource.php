@@ -24,22 +24,22 @@ class TeamResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Clients');
+        return __('Team');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('Clients');
+        return __('Team');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Clients');
+        return __('Team');
     }
 
     public static function getModelLabel(): string
     {
-        return __('Client');
+        return __('Team Member');
     }
 
     public static function form(Form $form): Form
