@@ -70,6 +70,10 @@ class AboutUsSettings extends Page implements HasForms
                             ->label(__('Experience Years'))
                             ->minValue(1)
                             ->required(),
+                        Forms\Components\TextInput::make('phone')
+                            ->label(__('Phone'))
+                            ->minValue(1)
+                            ->required(),
                         Textarea::make('short_description')
                             ->label(__('Short Description'))
                             ->maxLength(500)
