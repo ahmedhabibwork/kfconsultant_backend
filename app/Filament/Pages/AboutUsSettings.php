@@ -72,7 +72,6 @@ class AboutUsSettings extends Page implements HasForms
                             ->required(),
                         Forms\Components\TextInput::make('phone')
                             ->label(__('Phone'))
-                            ->minValue(1)
                             ->required(),
                         Textarea::make('short_description')
                             ->label(__('Short Description'))
