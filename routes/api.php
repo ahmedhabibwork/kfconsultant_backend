@@ -6,6 +6,7 @@ use App\Http\Controllers\API\V1\BlogController;
 use App\Http\Controllers\API\V1\BookingController;
 use App\Http\Controllers\API\V1\CategoryController;
 use App\Http\Controllers\API\V1\CountactUsController;
+use App\Http\Controllers\API\V1\FaqController;
 use App\Http\Controllers\API\V1\MovementController;
 use App\Http\Controllers\API\V1\PointController;
 use App\Http\Controllers\API\V1\RangeController;
@@ -36,7 +37,7 @@ Route::group([
         Route::get('/about-us', [HomeController::class, 'getAboutUs']);
         Route::get('/blogs', [BlogController::class, 'getAllBlogs']);
         Route::get('/blogs/{slug}', [BlogController::class, 'getblogDetails']);
-
+        Route::get('/faqs', [FaqController::class, 'getAllFaqs']);
         Route::get('/categories', [CategoryController::class, 'getAllCategories']);
         Route::get('/category/{slug}/sub-categories', [CategoryController::class, 'getSubCategoriesForCategory']);
         Route::get('/category/{slug}', [CategoryController::class, 'show']);
