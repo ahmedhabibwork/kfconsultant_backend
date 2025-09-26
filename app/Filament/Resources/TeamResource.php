@@ -53,14 +53,6 @@ class TeamResource extends Resource
                     ->label(__('Job Title'))
                     ->required(),
 
-                // RichEditor::make('description.en')
-                //     ->label(__('Description') . ' (' . __('English') . ')')
-                //     ->required(),
-
-                // RichEditor::make('description.ar')
-                //     ->label(__('Description') . ' (' . __('Arabic') . ')')
-                //     ->required(),
-
                 FileUpload::make('image')
                     ->label(__('Image'))
                     ->image()

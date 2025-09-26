@@ -54,6 +54,7 @@ class BannerResource extends Resource
                     ->disk('public')
                     ->visibility('public')
                     ->required()
+                    ->multiple()
                     ->imagePreviewHeight('100'),
 
                 RichEditor::make('description')
