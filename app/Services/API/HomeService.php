@@ -62,7 +62,7 @@ class HomeService
                 __('Returned Home page successfully.'),
                 [
                     'banner' => new BannerResource(  Banner::first() ),
-                    'best_selling_trips' => TripResource::collection(  Trip::bestSaller()->inRandomOrder()->take(4)->get() ),
+                    'recommended_trips' => TripResource::collection(  Trip::bestSaller()->inRandomOrder()->take(4)->get() ),
                     // 'whyUs' => new WhyUsResource(
                     //     WhyUs::first()
                     // ),

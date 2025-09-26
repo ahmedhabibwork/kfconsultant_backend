@@ -162,9 +162,9 @@ class TripResource extends Resource
                             ->label(__('Is Best Seller'))
                             ->default(false),
 
-                        Forms\Components\Toggle::make('is_popular')
-                            ->label(__('Is Popular'))
-                            ->default(false),
+                        // Forms\Components\Toggle::make('is_popular')
+                        //     ->label(__('Is Popular'))
+                        //     ->default(false),
                     ]),
 
                 // Forms\Components\TextInput::make('rating')
@@ -226,9 +226,9 @@ class TripResource extends Resource
                 Tables\Columns\TextColumn::make('price')->label('السعر'),
                 Tables\Columns\TextColumn::make('currency')->label('العملة'),
                 // Tables\Columns\ImageColumn::make('images')->label('الصورة'),
-                Tables\Columns\IconColumn::make('is_popular')
-                    ->boolean()
-                    ->label('شائع'),
+                // Tables\Columns\IconColumn::make('is_popular')
+                //     ->boolean()
+                //     ->label('شائع'),
 
                 Tables\Columns\IconColumn::make('is_best_seller')
                     ->boolean()
