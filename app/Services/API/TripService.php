@@ -57,19 +57,15 @@ class TripService
 
             $perPage = request()->input('per_page', 15);
             $currentPage = request()->input('page', 1);
+
             $tripsQuery = Trip::orderByDesc('trips.created_at');
+            $sortField = request()->input('sort_field', 'trips.price');
+            $sortDirection = request()->input('sort_direction', 'desc');
 
-            if (!empty($request['hajj_umrah']) && $request['hajj_umrah'] == true) {
-                $trips = $tripsQuery->where('category_id', Category::Hajj_Umrah);
-            } elseif (!empty($request['best_offer']) && $request['best_offer'] == true) {
-                $trips = $tripsQuery->bestOffer(); // ✅ استخدم scope
-            } elseif (!empty($request['popular']) && $request['popular'] == true) {
-                $trips = $tripsQuery->popular(); // ✅ استخدم scope
-            } else {
-                $trips = $tripsQuery;
-            }
 
-            $trips = $trips->paginate($perPage, ['*'], 'page', $currentPage);
+            $tripsQuery = $tripsQuery->orderBy($sortField, $sortDirection);
+
+            $trips = $tripsQuery->paginate($perPage, ['*'], 'page', $currentPage);
 
             return $this->okResponse(
                 __('Returned trips successfully.'),
@@ -100,7 +96,7 @@ class TripService
             return $this->okResponse(
                 __('Returned Trip Details successfully'),
                 [
-                    'trip'=>new TripResource($trip),
+                    'trip' => new TripResource($trip),
                     'popular_trips' => TripResource::collection(Trip::popular()->limit(4)->get()),
 
                 ]
