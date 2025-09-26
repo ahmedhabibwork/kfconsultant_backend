@@ -15,9 +15,6 @@ class Banner extends Model
     use HasFactory,  SoftDeletes;
 
     //    public $translatable = ['title','description'];
-    protected $casts = [
-        'image' => 'array',
-    ];
     protected $fillable = [
         'title',
         'description',

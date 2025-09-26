@@ -54,7 +54,6 @@ class BannerResource extends Resource
                     ->disk('public')
                     ->visibility('public')
                     ->required()
-                    ->multiple()
                     ->imagePreviewHeight('100'),
 
                 RichEditor::make('description')
@@ -84,11 +83,11 @@ class BannerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-             //   Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-              //      Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

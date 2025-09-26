@@ -25,7 +25,7 @@ class AboutUsSettings extends Page implements HasForms
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
     protected static string $view = 'filament.pages.about-us-settings';
     protected static ?string $navigationLabel = 'About Us';
-    //  protected static bool $shouldRegisterNavigation = false;
+  //  protected static bool $shouldRegisterNavigation = false;
 
     // protected static ?string $title = 'About Us Settings';
     public ?AboutUs $about;
@@ -100,7 +100,6 @@ class AboutUsSettings extends Page implements HasForms
                             ->disk('public')
                             ->visibility('public')
                             ->required()
-                            ->multiple()
                             ->imagePreviewHeight('100'),
 
                     ]),
@@ -118,19 +117,17 @@ class AboutUsSettings extends Page implements HasForms
                 'short_description' => ['required', 'string', 'max:500'],
                 'description' => ['required', 'string'],
                 'experience_years' => ['required', 'integer'],
-                'image'             => ['required', 'array'], // ✅ يقبل Array
-                'image.*'           => ['string'],
             ];
 
             // ✅ خد البيانات من الفورم
             $validated = $this->form->getState();
 
-            // // Convert image array -> string (لو رجعت Array)
-            // if (is_array($validated['image'])) {
-            //     $validated['image'] = collect($validated['image'])->first();
-            // }
+            // Convert image array -> string (لو رجعت Array)
+            if (is_array($validated['image'])) {
+                $validated['image'] = collect($validated['image'])->first();
+            }
 
-            // // ✅ اعمل validate يدوي قبل الحفظ
+            // ✅ اعمل validate يدوي قبل الحفظ
             $validated = validator($validated, $rules)->validate();
 
             $this->about->update($validated);
