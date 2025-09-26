@@ -47,10 +47,10 @@ class BlogResource extends Resource
                 TextInput::make('title')
                     ->required()
                     ->label(__('Title')),
-                Select::make('category_id')
-                    ->label(__('Category'))
-                    ->relationship('category', 'title')
-                    ->required(),
+                // Select::make('category_id')
+                //     ->label(__('Category'))
+                //     ->relationship('category', 'title')
+                //     ->required(),
 
                 FileUpload::make('images')
                     ->label(__('Image'))
@@ -97,7 +97,7 @@ class BlogResource extends Resource
                     ->label(__('ID')),
 
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
-                TextColumn::make('category.title')->label(__('Category Name'))->sortable()->searchable(),
+           //     TextColumn::make('category.title')->label(__('Category Name'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
                 // ImageColumn::make('image')->circular()->label('Image'),
                 TextColumn::make('created_at')

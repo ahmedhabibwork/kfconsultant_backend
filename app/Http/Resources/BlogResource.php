@@ -19,7 +19,7 @@ class BlogResource extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'title' => $this->title,
-            'category' => $this->category?->title,
+            // 'category' => $this->category?->title,
             'short_description' => $this->short_description,
             'description' => $this->description,
             'meta_title' => $this->meta_title,
