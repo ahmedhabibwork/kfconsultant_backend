@@ -18,6 +18,7 @@ class AboutUs extends Model
         'description',
         'image',
         'experience_years',
+        'phone',
 
     ];
     protected $casts = [

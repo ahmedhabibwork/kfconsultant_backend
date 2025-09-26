@@ -115,6 +115,7 @@ class AboutUsSettings extends Page implements HasForms
                 'title' => ['required', 'string', 'max:255'],
                 'short_description' => ['required', 'string', 'max:500'],
                 'description' => ['required', 'string'],
+                'phone' => ['required'],
                 'experience_years' => ['required', 'integer'],
                 'image' => ['required', 'string'],
             ];
