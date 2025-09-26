@@ -72,7 +72,7 @@ class BannerResource extends Resource
                     ->label(__('ID')),
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
-                ImageColumn::make('image')->label('Image')->circular()->width(50)->height(50),
+                ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
                     ->dateTime('d M, Y H:i:s')
@@ -84,11 +84,11 @@ class BannerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+             //   Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+              //      Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
