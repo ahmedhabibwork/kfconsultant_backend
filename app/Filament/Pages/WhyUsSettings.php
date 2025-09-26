@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Validator;
 class WhyUsSettings extends Page implements HasForms
 {
     use InteractsWithForms;
+    protected static bool $shouldRegisterNavigation = false;
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
     protected static string $view = 'filament.pages.why-us-settings';
     protected static ?string $navigationLabel = 'Why Us';
@@ -107,7 +108,7 @@ class WhyUsSettings extends Page implements HasForms
                 'description' => ['required', 'string'],
             ];
 
-            
+
             $validated = $this->form->getState();
 
             // // Convert image array -> string (لو رجعت Array)
@@ -115,7 +116,7 @@ class WhyUsSettings extends Page implements HasForms
             //     $validated['image'] = collect($validated['image'])->first();
             // }
 
-   
+
             $validated = validator($validated, $rules)->validate();
 
             $this->whyUs->update($validated);

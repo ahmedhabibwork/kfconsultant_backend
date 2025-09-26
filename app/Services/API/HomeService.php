@@ -62,9 +62,9 @@ class HomeService
                     'best_selling_trips' => TripResource::collection(
                         Trip::bestSaller()->inRandomOrder()->take(4)->get()
                     ),
-                    'whyUs' => new WhyUsResource(
-                        WhyUs::first()
-                    ),
+                    // 'whyUs' => new WhyUsResource(
+                    //     WhyUs::first()
+                    // ),
 
                     'comments' => CommentResource::collection(
                         Comment::inRandomOrder()->take(8)->get()
