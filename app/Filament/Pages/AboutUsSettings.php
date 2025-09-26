@@ -116,18 +116,19 @@ class AboutUsSettings extends Page implements HasForms
                 'short_description' => ['required', 'string', 'max:500'],
                 'description' => ['required', 'string'],
                 'experience_years' => ['required', 'integer'],
+                'image' => ['required', 'string'],
             ];
 
             // ✅ خد البيانات من الفورم
+
             $validated = $this->form->getState();
+
+            $validated = validator($validated, $rules)->validate();
 
             // Convert image array -> string (لو رجعت Array)
             // if (is_array($validated['image'])) {
             //     $validated['image'] = collect($validated['image'])->first();
             // }
-
-            // ✅ اعمل validate يدوي قبل الحفظ
-            $validated = validator($validated, $rules)->validate();
 
             $this->about->update($validated);
             $this->about->refresh();
