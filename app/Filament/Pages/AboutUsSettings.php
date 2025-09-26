@@ -122,9 +122,9 @@ class AboutUsSettings extends Page implements HasForms
             $validated = $this->form->getState();
 
             // Convert image array -> string (لو رجعت Array)
-            if (is_array($validated['image'])) {
-                $validated['image'] = collect($validated['image'])->first();
-            }
+            // if (is_array($validated['image'])) {
+            //     $validated['image'] = collect($validated['image'])->first();
+            // }
 
             // ✅ اعمل validate يدوي قبل الحفظ
             $validated = validator($validated, $rules)->validate();
