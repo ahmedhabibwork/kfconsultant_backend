@@ -19,7 +19,7 @@ class TeamResource extends JsonResource
 
             'id' => $this->id,
             'name' => $this->name,
-            'job_title' => $this->job_title,
+            'job_title' => $this->job,
             'image' => $this->image ? url('storage/' . $this->image) : null,
             'created_at' => $this->created_at,
         ];
