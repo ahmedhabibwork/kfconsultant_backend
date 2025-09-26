@@ -21,6 +21,7 @@ class AboutUsResource extends JsonResource
             'title' => $this->title,
             'short_description' => $this->short_description,
             'description' => $this->description,
+            'phone' => $this->phone,
             'experience_years' => $this->experience_years,
             'image' => $this->image ? url('storage/' . $this->image) : null,
             'created_at' => $this->created_at,
