@@ -49,7 +49,7 @@ class TeamResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label(__('Name'))
                     ->required(),
-                Forms\Components\TextInput::make('job_title')
+                Forms\Components\TextInput::make('job')
                     ->label(__('Job Title'))
                     ->required(),
 
@@ -82,6 +82,7 @@ class TeamResource extends Resource
                     ->sortable()
                     ->label(__('ID')),
                 TextColumn::make('name')->label(__('Name'))->sortable()->searchable(),
+                TextColumn::make('job')->label(__('Job Title'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
                 ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
 
