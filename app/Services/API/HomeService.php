@@ -21,6 +21,7 @@ use App\Http\Resources\ReviewResource;
 use App\Http\Resources\ReviewStandardResource;
 use App\Http\Resources\ServiceResource;
 use App\Http\Resources\TripResource;
+use App\Http\Resources\WhyUsResource;
 use App\Models\AboutUs;
 use App\Models\Banner;
 use App\Models\Blog;
@@ -35,6 +36,7 @@ use App\Models\Range;
 use App\Models\Review;
 use App\Models\ReviewStandard;
 use App\Models\Trip;
+use App\Models\WhyUs;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -60,6 +62,9 @@ class HomeService
                     'best_selling_trips' => TripResource::collection(
                         Trip::bestSaller()->inRandomOrder()->take(4)->get()
                     ),
+                    'whyUs' => new WhyUsResource(
+                        WhyUs::first()
+                    ),
 
                     'comments' => CommentResource::collection(
                         Comment::inRandomOrder()->take(8)->get()
@@ -67,7 +72,7 @@ class HomeService
                     'blog' => BlogResource::collection(
                         Blog::latest()->take(3)->get()
                     )
-       
+
                 ]
             );
         } catch (\Throwable $exception) {
