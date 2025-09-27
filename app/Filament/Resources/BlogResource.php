@@ -77,10 +77,10 @@ class BlogResource extends Resource
                     ->direction('auto|rtl|ltr')
                     ->columnSpan('full')
                     ->required(),
-                RichEditor::make('meta_title')
+                TextArea::make('meta_title')
                     ->required()
                     ->label(__('Meta Title')),
-                RichEditor::make('meta_description')
+                TextArea::make('meta_description')
                     ->required()
                     ->label(__('Meta Description')),
 
