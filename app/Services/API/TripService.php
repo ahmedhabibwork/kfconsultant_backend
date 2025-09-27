@@ -49,7 +49,27 @@ class TripService
 {
     const SORT_DIRECTIONS = ['asc', 'desc'];
     use ResponseTrait;
+    public function getTripBySlug(string $slug)
+    {
+        try {
+            $trip = Trip::where('slug', $slug)->first();
+            if (!$trip) {
+                return $this->notFoundResponse('Trip');
+            }
+            return $this->okResponse(
+                __('Returned Trip Details successfully'),
+                [
+                    'trip' => new TripResource($trip),
+                    'popular_trips' => TripResource::collection(Trip::popular()->limit(4)->get()),
 
+                ]
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+
+            return $this->exceptionFailed($exception);
+        }
+    }
 
     public function index($request)
     {
@@ -87,29 +107,6 @@ class TripService
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             dd($exception);
-            return $this->exceptionFailed($exception);
-        }
-    }
-
-
-    public function getTripBySlug(string $slug)
-    {
-        try {
-            $trip = Trip::where('slug', $slug)->first();
-            if (!$trip) {
-                return $this->notFoundResponse('Trip');
-            }
-            return $this->okResponse(
-                __('Returned Trip Details successfully'),
-                [
-                    'trip' => new TripResource($trip),
-                    'popular_trips' => TripResource::collection(Trip::popular()->limit(4)->get()),
-
-                ]
-            );
-        } catch (\Exception $exception) {
-            Log::error($exception->getMessage());
-
             return $this->exceptionFailed($exception);
         }
     }
