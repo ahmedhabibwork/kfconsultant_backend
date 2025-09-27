@@ -61,6 +61,7 @@ Route::group([
     Route::name('trips.')->prefix('trips')->group(function () {
         Route::get('/', [TripController::class, 'index']);
         Route::get('/{slug}', [TripController::class, 'show']);
+        Route::get('/search', [TripController::class, 'index']);
     });
 
     Route::get('/get-point-byslug/{slug}', [PointController::class, 'getPointBySlug']);

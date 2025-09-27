@@ -40,9 +40,11 @@ class Trip extends Model
         'is_best_offer',
         'is_best_seller',
         'cover_image',
+        'nile_cruise',
         'meta_title',
         'meta_description',
     ];
+
     public function scopePopular($query)
     {
         return $query->where('is_popular', 1);

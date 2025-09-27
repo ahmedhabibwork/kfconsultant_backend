@@ -219,7 +219,7 @@ class TripResource extends Resource
                     ->label(__('ID')),
                 ImageColumn::make('cover_image')->label(__('Cover Image'))->circular()->width(50)->height(50),
                 Tables\Columns\TextColumn::make('title')->label('العنوان')->searchable(),
-                Tables\Columns\TextColumn::make('city.title')->label('المدينة')->searchable(),
+                Tables\Columns\TextColumn::make('city.name')->label('المدينة')->searchable(),
                 // Tables\Columns\TextColumn::make('category.title')->label('التصنيف'),
                 // Tables\Columns\TextColumn::make('subCategory.title')->label('التصنيف الفرعي'),
                 // Tables\Columns\TextColumn::make('destination')->label('الوجهة'),

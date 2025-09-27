@@ -55,30 +55,35 @@ class TripService
     {
         try {
 
-            $perPage = request()->input('per_page', 15);
-            $currentPage = request()->input('page', 1);
+            $perPage = $request->input('per_page', 15);
+            $currentPage = $request->input('page', 1);
 
-            $tripsQuery = Trip::orderByDesc('trips.created_at');
-            $sortField = request()->input('sort_field', 'trips.price');
-            $sortDirection = request()->input('sort_direction', 'desc');
+            $sortField = $request->input('sort_field', 'price');
+            $sortDirection = strtolower($request->input('sort_direction', 'desc'));
 
+            // 🟢 Allowed sortable fields
+            $allowedSortFields = ['price', 'title', 'created_at'];
+            if (!in_array($sortField, $allowedSortFields)) {
+                $sortField = 'price';
+            }
 
-            $tripsQuery = $tripsQuery->orderBy($sortField, $sortDirection);
+            // 🟢 Allowed directions
+            $allowedDirections = ['asc', 'desc'];
+            if (!in_array($sortDirection, $allowedDirections)) {
+                $sortDirection = 'desc';
+            }
+
+            $search = $request->query('search');
+
+            $tripsQuery = Trip::with('city') // eager load cities
+                ->when($search, function ($q) use ($search) {
+                    $q->where('title', 'LIKE', "%{$search}%");
+                })
+                ->orderBy($sortField, $sortDirection);
 
             $trips = $tripsQuery->paginate($perPage, ['*'], 'page', $currentPage);
 
-            return $this->okResponse(
-                __('Returned trips successfully.'),
-                [
-                    'trips' => TripResource::collection($trips),
-                    'pagination' => [
-                        'total' => $trips->total(),
-                        'per_page' => $trips->perPage(),
-                        'current_page' => $trips->currentPage(),
-                        'last_page' => $trips->lastPage(),
-                    ],
-                ]
-            );
+            return $this->paginateResponse(TripResource::collection($trips));
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
             dd($exception);
