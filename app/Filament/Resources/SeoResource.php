@@ -47,7 +47,7 @@ class SeoResource extends Resource
                 Grid::make(2)
                     ->schema([
                         Forms\Components\TextInput::make('title')
-                            ->label(__('Title'))
+                            ->label(__('Meta Title'))
                             ->required(),
                     ]),
 
@@ -55,7 +55,7 @@ class SeoResource extends Resource
                     ->schema([
 
                         Forms\Components\Textarea::make('description')
-                            ->label(__('Description'))
+                            ->label(__('Meta Description'))
                             ->required(),
                     ]),
             ]);
