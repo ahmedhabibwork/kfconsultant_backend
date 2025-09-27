@@ -26,7 +26,7 @@ class Trip extends Model
         'overview',
         'highlights',
         'itinerary',
-        
+        'city_id',
         'accommodation',
         'inclusions',
         'price',
@@ -56,7 +56,10 @@ class Trip extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
     public function subCategory()
     {
         return $this->belongsTo(SubCategory::class);

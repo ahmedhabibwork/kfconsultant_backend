@@ -57,13 +57,13 @@ class TripResource extends Resource
                 // Forms\Components\Grid::make(2)
                 //     ->schema([
 
-                //     Forms\Components\Select::make('category_id')
-                //         ->label('التصنيف')
-                //         ->relationship('category', 'title')
-                //         ->required()
-                //         ->reactive() // يخلي الفيلد يتفاعل مع التغيير
+                Forms\Components\Select::make('city_id')
+                    ->label('المدينة')
+                    ->relationship('city', 'title')
+                    ->required()
+                    ->reactive() // يخلي الفيلد يتفاعل مع التغيير
 
-                //     ,
+                ,
 
                 //     Forms\Components\Select::make('sub_category_id')
                 //         ->label('التصنيف الفرعي')
