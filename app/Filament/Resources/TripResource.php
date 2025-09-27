@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -161,7 +162,15 @@ class TripResource extends Resource
                         Forms\Components\Toggle::make('is_best_seller')
                             ->label(__('Is Best Seller'))
                             ->default(false),
-
+                        Forms\Components\Radio::make('type')
+                            ->label('Trip Type')
+                            ->options([
+                                'activity' => 'Activity',
+                                'nile_cruise' => 'Nile Cruise',
+                            ])
+                            ->default('activity')
+                            ->inline()
+                            ->required(),
                         // Forms\Components\Toggle::make('is_popular')
                         //     ->label(__('Is Popular'))
                         //     ->default(false),
@@ -181,7 +190,6 @@ class TripResource extends Resource
                     ->label(__('Meta Description')),
                 Forms\Components\Grid::make(1)
                     ->schema([
-
                         FileUpload::make('cover_image')
                             ->label(__('Cover Image'))
                             ->image()
@@ -194,7 +202,6 @@ class TripResource extends Resource
 
                 Forms\Components\Grid::make(1)
                     ->schema([
-
                         FileUpload::make('images')
                             ->label(__('Images'))
                             ->multiple()
@@ -220,6 +227,21 @@ class TripResource extends Resource
                 ImageColumn::make('cover_image')->label(__('Cover Image'))->circular()->width(50)->height(50),
                 Tables\Columns\TextColumn::make('title')->label('العنوان')->searchable(),
                 Tables\Columns\TextColumn::make('city.name')->label('المدينة')->searchable(),
+                TextColumn::make('type')
+                    ->label('Type')
+                    ->sortable()
+                    ->searchable()
+                    ->badge()
+                    ->formatStateUsing(fn($state) => match ($state) {
+                        'activity' => 'Activity',
+                        'nile_cruise' => 'Nile Cruise',
+                        default => ucfirst($state),
+                    })
+                    ->colors([
+                        'success' => 'activity',
+                        'info' => 'nile_cruise',
+
+                    ]),
                 // Tables\Columns\TextColumn::make('category.title')->label('التصنيف'),
                 // Tables\Columns\TextColumn::make('subCategory.title')->label('التصنيف الفرعي'),
                 // Tables\Columns\TextColumn::make('destination')->label('الوجهة'),
@@ -237,7 +259,12 @@ class TripResource extends Resource
                 // Tables\Columns\TextColumn::make('rating')->label('التقييم'),
             ])
             ->filters([
-                //
+                SelectFilter::make('type')
+                    ->label('Type')
+                    ->options([
+                        'activity' => 'Activity',
+                        'nile_cruise' => 'Nile Cruise',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
