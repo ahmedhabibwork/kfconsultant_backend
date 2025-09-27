@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class SubscriptionResource extends Resource
 {
     protected static ?string $model = Subscription::class;
-
+    protected static bool $shouldRegisterNavigation = false;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     public static function getNavigationGroup(): ?string
     {
@@ -66,7 +66,7 @@ class SubscriptionResource extends Resource
                 //
             ])
             ->actions([
-            //    Tables\Actions\EditAction::make(),
+                //    Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
