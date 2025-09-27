@@ -163,7 +163,7 @@ class TripResource extends Resource
                             ->label(__('Is Best Seller'))
                             ->default(false),
                         Forms\Components\Radio::make('type')
-                            ->label('Trip Type')
+                            ->label(__('Trip Type'))
                             ->options([
                                 'activity' => 'Activity',
                                 'nile_cruise' => 'Nile Cruise',
@@ -228,7 +228,7 @@ class TripResource extends Resource
                 Tables\Columns\TextColumn::make('title')->label('العنوان')->searchable(),
                 Tables\Columns\TextColumn::make('city.name')->label('المدينة')->searchable(),
                 TextColumn::make('type')
-                    ->label('Type')
+                    ->label(__('Type'))
                     ->sortable()
                     ->searchable()
                     ->badge()
@@ -260,7 +260,7 @@ class TripResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('type')
-                    ->label('Type')
+                    ->label(__('Type'))
                     ->options([
                         'activity' => 'Activity',
                         'nile_cruise' => 'Nile Cruise',
