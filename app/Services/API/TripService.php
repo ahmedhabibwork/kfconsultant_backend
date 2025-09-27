@@ -81,7 +81,7 @@ class TripService
             $sortField = $request->input('sort_field', 'price');
             $sortDirection = strtolower($request->input('sort_direction', 'desc'));
 
-            $allowedSortFields = ['price', 'title', 'created_at'];
+            $allowedSortFields = ['price', 'created_at'];
             if (!in_array($sortField, $allowedSortFields)) {
                 $sortField = 'price';
             }

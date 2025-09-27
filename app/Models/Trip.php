@@ -49,6 +49,14 @@ class Trip extends Model
     {
         return $query->where('is_popular', 1);
     }
+    public function scopeActivity($query)
+    {
+        return $query->where('type', 'activity');
+    }
+    public function scopeNileCruise($query)
+    {
+        return $query->where('type', 'nile_cruise');
+    }
 
     public function scopeBestSaller($query)
     {
