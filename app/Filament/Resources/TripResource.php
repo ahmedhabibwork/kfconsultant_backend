@@ -59,7 +59,7 @@ class TripResource extends Resource
 
                 Forms\Components\Select::make('city_id')
                     ->label('المدينة')
-                    ->relationship('city', 'title')
+                    ->relationship('city', 'name')
                     ->required()
                     ->reactive() // يخلي الفيلد يتفاعل مع التغيير
 

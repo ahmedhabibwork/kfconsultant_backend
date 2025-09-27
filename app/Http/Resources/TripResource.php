@@ -20,6 +20,11 @@ class TripResource extends JsonResource
             'id'              => $this->id,
             'title'           => $this->title,
             'slug'            => $this->slug,
+            'city' => [
+                'id' => $this->city?->id,
+                'slug' => $this->city?->slug,
+                'title' => $this->city?->title,
+            ],
             // 'category' => [
             //     'id' => $this->category?->id,
             //     'slug' => $this->category?->slug,
