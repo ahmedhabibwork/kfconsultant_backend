@@ -71,42 +71,57 @@ class TripService
         }
     }
 
-    public function index($request)
+    public function index(Request $request)
     {
         try {
-
             $perPage = $request->input('per_page', 15);
             $currentPage = $request->input('page', 1);
 
+            // ✅ validate sort field and direction
             $sortField = $request->input('sort_field', 'price');
             $sortDirection = strtolower($request->input('sort_direction', 'desc'));
 
-            // 🟢 Allowed sortable fields
             $allowedSortFields = ['price', 'title', 'created_at'];
             if (!in_array($sortField, $allowedSortFields)) {
                 $sortField = 'price';
             }
 
-            // 🟢 Allowed directions
             $allowedDirections = ['asc', 'desc'];
             if (!in_array($sortDirection, $allowedDirections)) {
                 $sortDirection = 'desc';
             }
 
-            $search = $request->query('search');
+            // ✅ start query
+            $tripsQuery = Trip::with('city');
 
-            $tripsQuery = Trip::with('city') // eager load cities
-                ->when($search, function ($q) use ($search) {
-                    $q->where('title', 'LIKE', "%{$search}%");
-                })
-                ->orderBy($sortField, $sortDirection);
+            // ✅ apply search
+            if ($search = $request->query('search')) {
+                $tripsQuery->where(function ($q) use ($search) {
+                    $q->where('title', 'LIKE', "%{$search}%")
+                        ->orWhere('type', 'LIKE', "%{$search}%")
+                        ->orWhere('description', 'LIKE', "%{$search}%")
+                        ->orWhere('overview', 'LIKE', "%{$search}%")
+                        ->orWhere('highlights', 'LIKE', "%{$search}%")
+                        ->orWhere('itinerary', 'LIKE', "%{$search}%")
+                        ->orWhere('accommodation', 'LIKE', "%{$search}%")
+                        ->orWhere('inclusions', 'LIKE', "%{$search}%")
+                        ->orWhere('price', 'LIKE', "%{$search}%")
+                        ->orWhereHas('city', function ($cityQuery) use ($search) {
+                            $cityQuery->where('name', 'LIKE', "%{$search}%")
+                                ->orWhere('slug', 'LIKE', "%{$search}%");
+                        });
+                });
+            }
+            $tripsQuery->distinct('trips.id');
+            // ✅ sorting
+            $tripsQuery->orderBy($sortField, $sortDirection);
 
+            // ✅ paginate
             $trips = $tripsQuery->paginate($perPage, ['*'], 'page', $currentPage);
 
             return $this->paginateResponse(TripResource::collection($trips));
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            dd($exception);
             return $this->exceptionFailed($exception);
         }
     }
