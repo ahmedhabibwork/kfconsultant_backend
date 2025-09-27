@@ -66,7 +66,7 @@ class HomeService
                     // 'whyUs' => new WhyUsResource(
                     //     WhyUs::first()
                     // ),
-                    'luxury_trips' => TripResource::collection(Trip::Join('cities', 'trips.city_id', '=', 'cities.id')->where('cities.slug', 'luxury')->inRandomOrder()->take(8)->get()),
+                    'luxury_trips' => TripResource::collection(Trip::Join('cities', 'trips.city_id', '=', 'cities.id')->where('cities.slug', 'luxor')->inRandomOrder()->take(8)->get()),
                     'cairo_trips' => TripResource::collection(Trip::Join('cities', 'trips.city_id', '=', 'cities.id')->where('cities.slug', 'cairo')->inRandomOrder()->take(8)->get()),
 
                     'comments' => CommentResource::collection(
