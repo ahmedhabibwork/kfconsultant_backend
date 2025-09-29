@@ -29,7 +29,7 @@ class DashboardPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
-            ->brandLogo(url('/images/logo.webp'))
+            ->brandLogo(url('/images/logo.svg'))
             ->brandLogoHeight('2.5rem')
             ->brandName(__('Kemet'))
             ->favicon(url('/style/assets/img/logo/logo1.png'))
