@@ -15,6 +15,7 @@ class Trip extends Model
         'images' => 'array',
         'is_popular' => 'boolean',
         'is_best_offer' => 'boolean',
+        'departure_time' => 'datetime',
     ];
     protected $fillable = [
         'title',
@@ -43,6 +44,8 @@ class Trip extends Model
         'cover_image',
         'meta_title',
         'meta_description',
+        'max_people',
+        'departure_time',
     ];
 
     public function scopePopular($query)

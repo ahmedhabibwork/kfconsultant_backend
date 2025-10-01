@@ -7,6 +7,7 @@ use App\Filament\Resources\TripResource\Pages;
 use App\Filament\Resources\TripResource\RelationManagers;
 use App\Models\Trip;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
@@ -56,8 +57,7 @@ class TripResource extends Resource
                 Forms\Components\TextInput::make('title')
                     ->label(__('Title'))
                     ->maxLength(255),
-                // Forms\Components\Grid::make(2)
-                //     ->schema([
+
 
                 Forms\Components\Select::make('city_id')
                     ->label('المدينة')
@@ -67,30 +67,19 @@ class TripResource extends Resource
                 TextInput::make('slug')
                     ->label(__('Slug')),
 
-                //     Forms\Components\Select::make('sub_category_id')
-                //         ->label('التصنيف الفرعي')
-                //         ->options(function (callable $get) {
-                //             $categoryId = $get('category_id');
-                //             if (!$categoryId) {
-                //                 return [];
-                //             }
 
-                //             return \App\Models\SubCategory::where('category_id', $categoryId)
-                //                 ->pluck('title', 'id');
-                //         })
-                //         ->reactive()
-                //         ->disabled(fn(callable $get) => !$get('category_id')),
-                // ]),
-
-
-
-                // Forms\Components\TextInput::make('destination')
-                //     ->label('الوجهة')
-                //     ->required(),
 
                 Forms\Components\TextInput::make('duration')
                     ->label(__('Duration'))
                     ->required(),
+                Forms\Components\TextInput::make('max_people')
+                    ->label(__('Max People'))
+                    ->minValue(1)
+                    ->required(),
+
+                DateTimePicker::make('departure_time')
+                    ->label(__('Departure Time'))
+                    ,
 
 
                 Forms\Components\Grid::make(2)
