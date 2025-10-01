@@ -76,9 +76,14 @@ class Trip extends Model
     }
     protected static function booted(): void
     {
-
         static::creating(function (Trip $item) {
-            $slug = str_replace(' ', '-', $item->title); // Keep Arabic letters
+            // If slug is empty, generate from title
+            if (empty($item->slug)) {
+                $slug = str_replace(' ', '-', $item->title); // keep Arabic letters
+            } else {
+                $slug = str_replace(' ', '-', $item->slug);
+            }
+
             $originalSlug = $slug;
             $counter = 1;
 
@@ -91,18 +96,28 @@ class Trip extends Model
         });
 
         static::updating(function (Trip $item) {
-            if ($item->isDirty('title')) {
-                $slug = str_replace(' ', '-', $item->title); // Keep Arabic letters
-                $originalSlug = $slug;
-                $counter = 1;
-
-                while (Trip::where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
-                    $slug = $originalSlug . '-' . $counter;
-                    $counter++;
-                }
-
-                $item->slug = $slug;
+            // If slug is empty, regenerate from title
+            if (empty($item->slug)) {
+                $slug = str_replace(' ', '-', $item->title);
+            } elseif ($item->isDirty('slug')) {
+                // If slug manually updated
+                $slug = str_replace(' ', '-', $item->slug);
+            } elseif ($item->isDirty('title')) {
+                // If title changed but slug was never manually set
+                $slug = str_replace(' ', '-', $item->title);
+            } else {
+                return; // no change needed
             }
+
+            $originalSlug = $slug;
+            $counter = 1;
+
+            while (Trip::where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
+            }
+
+            $item->slug = $slug;
         });
     }
 }

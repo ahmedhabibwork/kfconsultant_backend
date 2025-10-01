@@ -35,6 +35,7 @@ class Blog extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
     protected static function booted(): void
     {
         static::creating(function (Blog $item) {

@@ -10,6 +10,7 @@ use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -62,9 +63,9 @@ class TripResource extends Resource
                     ->label('المدينة')
                     ->relationship('city', 'name')
                     ->required()
-                    ->reactive() // يخلي الفيلد يتفاعل مع التغيير
-
-                ,
+                    ->reactive(),
+                TextInput::make('slug')
+                    ->label(__('Slug')),
 
                 //     Forms\Components\Select::make('sub_category_id')
                 //         ->label('التصنيف الفرعي')
