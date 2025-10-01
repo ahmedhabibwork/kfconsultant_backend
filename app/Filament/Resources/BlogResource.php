@@ -79,12 +79,13 @@ class BlogResource extends Resource
                     ->profile('default|simple|full|minimal|none|custom')
                     ->direction('auto|rtl|ltr')
                     ->columnSpan('full')
-                    ->required(),
-                Textarea::make('meta_title')
                     ->required()
+                    ,
+                Textarea::make('meta_title')
+                    // ->required()
                     ->label(__('Meta Title')),
                 Textarea::make('meta_description')
-                    ->required()
+                    // ->required()
                     ->label(__('Meta Description')),
 
                 Grid::make(2)
