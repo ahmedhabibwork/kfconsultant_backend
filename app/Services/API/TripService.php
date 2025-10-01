@@ -115,8 +115,9 @@ class TripService
                 });
             }
             if (! empty($request->query('tags'))) {
-                $tripsQuery->whereHas('tags', function ($query) use ($request) {
-                    $query->whereIn('tags.id', $request->query('tags'));
+                $tags = explode(',', $request->query('tags')); // يحوله array
+                $tripsQuery->whereHas('tags', function ($query) use ($tags) {
+                    $query->whereIn('tags.slug', $tags); // slug لو بتفلتر بالـ slug
                 });
             }
             $tripsQuery->distinct('trips.id');
