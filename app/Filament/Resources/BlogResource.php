@@ -7,16 +7,21 @@ use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
 use Filament\Forms;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -47,10 +52,13 @@ class BlogResource extends Resource
                 TextInput::make('title')
                     ->required()
                     ->label(__('Title')),
-                // Select::make('category_id')
-                //     ->label(__('Category'))
-                //     ->relationship('category', 'title')
-                //     ->required(),
+                TextInput::make('slug')
+                    ->label(__('Slug')),
+
+                DateTimePicker::make('published_date')
+                    ->label(__('Published Date'))
+                    ->native(false),
+
 
                 FileUpload::make('images')
                     ->label(__('Image'))
@@ -62,12 +70,7 @@ class BlogResource extends Resource
                     ->required()
                     ->imagePreviewHeight('100'),
 
-                RichEditor::make('short_description')
-                    ->required()
-                    ->label(__('Short Description')),
-                // RichEditor::make('description')
-                //     ->required()
-                //     ->label(__('Description')),
+
                 TinyEditor::make('description')
                     ->label(__('Description'))
                     ->fileAttachmentsDisk('public')
@@ -77,12 +80,18 @@ class BlogResource extends Resource
                     ->direction('auto|rtl|ltr')
                     ->columnSpan('full')
                     ->required(),
-                TextArea::make('meta_title')
+                Textarea::make('meta_title')
                     ->required()
                     ->label(__('Meta Title')),
-                TextArea::make('meta_description')
+                Textarea::make('meta_description')
                     ->required()
                     ->label(__('Meta Description')),
+
+                Grid::make(2)
+                    ->schema([
+                        Toggle::make('is_published')->label(__('Is Published?'))->default(true),
+
+                    ])
 
 
             ]);
@@ -97,9 +106,23 @@ class BlogResource extends Resource
                     ->label(__('ID')),
 
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
-           //     TextColumn::make('category.title')->label(__('Category Name'))->sortable()->searchable(),
-                // TextColumn::make('description')->label(__('Description'))->limit(50),
-                // ImageColumn::make('image')->circular()->label('Image'),
+                TextColumn::make('slug')->label(__('Slug'))->sortable()->searchable(),
+
+                ToggleColumn::make('is_published')
+                    ->label(__('Is Published?'))
+                    ->onColor('success')
+                    ->offColor('gray')
+                    ->onIcon('heroicon-m-check')
+                    ->offIcon('heroicon-m-x-mark')
+                    ->getStateUsing(fn($record) => $record->is_published)
+                    ->afterStateUpdated(fn($record, $state) => $record->update(['is_published' => $state])),
+
+
+                TextColumn::make('published_date')
+                    ->label(__('Published Date'))
+                    ->dateTime('d M, Y H:i:s')
+                    ->sortable()
+                    ->tooltip(fn($record) => $record->created_at?->format('Y-m-d H:i:s') ?? __('No Date')),
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
                     ->dateTime('d M, Y H:i:s')

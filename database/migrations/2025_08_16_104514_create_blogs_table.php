@@ -21,7 +21,6 @@ return new class extends Migration
             $table->text('meta_description')->nullable();
             $table->boolean('is_published')->default(1);
             $table->string('images')->nullable();
-
             $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
