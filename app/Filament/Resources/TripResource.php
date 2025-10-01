@@ -184,10 +184,8 @@ class TripResource extends Resource
                 //     ->default(0),
 
                 Textarea::make('meta_title')
-                    ->required()
                     ->label(__('Meta Title')),
                 textarea::make('meta_description')
-                    ->required()
                     ->label(__('Meta Description')),
                 Forms\Components\Grid::make(1)
                     ->schema([
@@ -228,7 +226,6 @@ class TripResource extends Resource
                 ImageColumn::make('cover_image')->label(__('Cover Image'))->circular()->width(50)->height(50),
                 Tables\Columns\TextColumn::make('title')->label('العنوان')->searchable(),
                 Tables\Columns\TextColumn::make('slug')->label(__('Slug'))->searchable(),
-
                 Tables\Columns\TextColumn::make('city.name')->label('المدينة')->searchable(),
                 TextColumn::make('type')
                     ->label(__('Type'))
