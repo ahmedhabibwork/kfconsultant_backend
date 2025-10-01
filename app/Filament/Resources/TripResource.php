@@ -65,7 +65,8 @@ class TripResource extends Resource
                     ->relationship('tags', 'name')
                     ->preload()
                     ->searchable()
-                    ->label('Tags'),
+                    ->required()
+                    ->label(__('Tags')),
                 Forms\Components\Select::make('city_id')
                     ->label('المدينة')
                     ->relationship('city', 'name')
