@@ -8,6 +8,7 @@ use App\Filament\Resources\SeoResource\Pages;
 use App\Filament\Resources\SeoResource\RelationManagers;
 use App\Models\Seo;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -23,12 +24,19 @@ class SeoResource extends Resource
     protected static ?string $model = Seo::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+
     public static function getNavigationLabel(): string
     {
-        return __('Seo');
+        return __('Seos');
     }
 
     public static function getPluralModelLabel(): string
+    {
+        return __('Seos');
+    }
+
+    public static function getModelLabel(): string
     {
         return __('Seo');
     }
@@ -49,14 +57,40 @@ class SeoResource extends Resource
                         Forms\Components\TextInput::make('title')
                             ->label(__('Meta Title'))
                             ->required(),
+                        Forms\Components\Textarea::make('description')
+                            ->label(__('Meta Description'))
+                            ->required(),
                     ]),
 
                 Grid::make(2)
                     ->schema([
+                        Forms\Components\Textarea::make('og_description')
+                            ->label(__('Open Graph Description')),
+                        Forms\Components\Textarea::make('twitter_description')
+                            ->label(__('Twitter Description')),
+                    ]),
 
-                        Forms\Components\Textarea::make('description')
-                            ->label(__('Meta Description'))
-                            ->required(),
+
+                Grid::make(2)
+                    ->schema([
+
+                        FileUpload::make('og_image')
+                            ->label(__('Open Graph Image'))
+                            ->image()
+                            ->directory('seos')
+                            ->disk('public')
+                            ->visibility('public')
+
+                            ->imagePreviewHeight('100'),
+
+                        FileUpload::make('twitter_image')
+                            ->label(__('Twitter Image'))
+                            ->image()
+                            ->directory('seos')
+                            ->disk('public')
+                            ->visibility('public')
+
+                            ->imagePreviewHeight('100'),
                     ]),
             ]);
     }
