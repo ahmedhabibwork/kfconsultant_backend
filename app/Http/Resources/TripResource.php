@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Society;
+use App\Models\Tag;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TripResource extends JsonResource
@@ -25,7 +26,7 @@ class TripResource extends JsonResource
                 'slug' => $this->city?->slug,
                 'title' => $this->city?->title,
             ],
-            'tags' => $this->tags,
+            'tags' => TagResource::collection($this->tags),
             // 'category' => [
             //     'id' => $this->category?->id,
             //     'slug' => $this->category?->slug,
