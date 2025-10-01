@@ -47,7 +47,10 @@ class Trip extends Model
         'max_people',
         'departure_time',
     ];
-
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
     public function scopePopular($query)
     {
         return $query->where('is_popular', 1);

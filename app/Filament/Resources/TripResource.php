@@ -60,6 +60,12 @@ class TripResource extends Resource
 
                 TextInput::make('slug')
                     ->label(__('Slug')),
+                Forms\Components\Select::make('tags')
+                    ->multiple()
+                    ->relationship('tags', 'name')
+                    ->preload()
+                    ->searchable()
+                    ->label('Tags'),
                 Forms\Components\Select::make('city_id')
                     ->label('المدينة')
                     ->relationship('city', 'name')
@@ -217,6 +223,8 @@ class TripResource extends Resource
                 ImageColumn::make('cover_image')->label(__('Cover Image'))->circular()->width(50)->height(50),
                 Tables\Columns\TextColumn::make('title')->label('العنوان')->searchable(),
                 Tables\Columns\TextColumn::make('slug')->label(__('Slug'))->searchable(),
+                Tables\Columns\TagsColumn::make('tags.name')
+                    ->label(__('Tags')),
                 Tables\Columns\TextColumn::make('city.name')->label('المدينة')->searchable(),
                 TextColumn::make('type')
                     ->label(__('Type'))

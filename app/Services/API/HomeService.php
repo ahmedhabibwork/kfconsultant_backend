@@ -20,6 +20,7 @@ use App\Http\Resources\RangeResource;
 use App\Http\Resources\ReviewResource;
 use App\Http\Resources\ReviewStandardResource;
 use App\Http\Resources\ServiceResource;
+use App\Http\Resources\TagResource;
 use App\Http\Resources\TeamResource;
 use App\Http\Resources\TripResource;
 use App\Http\Resources\WhyUsResource;
@@ -36,6 +37,7 @@ use App\Models\Point;
 use App\Models\Range;
 use App\Models\Review;
 use App\Models\ReviewStandard;
+use App\Models\Tag;
 use App\Models\Team;
 use App\Models\Trip;
 use App\Models\WhyUs;
@@ -121,4 +123,33 @@ class HomeService
             return $this->exceptionFailed($exception);
         }
     }
+    public function getAllTags()
+    {
+        try {
+            $tags = Tag::get();
+            return $this->okResponse(
+                __('Returned Tags successfully.'),
+                TagResource::collection($tags),
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            //  dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+     public function getTagTrips($slug)
+    {
+        try {
+            $trips = Tag::with('trips')->where('slug', $slug)->trips()->get();
+            return $this->okResponse(
+                __('Returned Trips For Tag successfully.'),
+                TripResource::collection($trips),
+            );
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            //  dd($exception);
+            return $this->exceptionFailed($exception);
+        }
+    }
+   
 }
