@@ -77,6 +77,7 @@ class TripService
             $perPage = $request->input('per_page', 15);
             $currentPage = $request->input('page', 1);
 
+
             // ✅ validate sort field and direction
             $sortField = $request->input('sort_field', 'price');
             $sortDirection = strtolower($request->input('sort_direction', 'desc'));
@@ -90,6 +91,7 @@ class TripService
             if (!in_array($sortDirection, $allowedDirections)) {
                 $sortDirection = 'desc';
             }
+
 
             // ✅ start query
             $tripsQuery = Trip::with('city');
@@ -110,6 +112,11 @@ class TripService
                             $cityQuery->where('name', 'LIKE', "%{$search}%")
                                 ->orWhere('slug', 'LIKE', "%{$search}%");
                         });
+                });
+            }
+            if (! empty($request->query('tags'))) {
+                $tripsQuery->whereHas('tags', function ($query) use ($request) {
+                    $query->whereIn('tags.id', $request->query('tags'));
                 });
             }
             $tripsQuery->distinct('trips.id');
