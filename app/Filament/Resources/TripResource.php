@@ -58,14 +58,14 @@ class TripResource extends Resource
                     ->label(__('Title'))
                     ->maxLength(255),
 
-
+                TextInput::make('slug')
+                    ->label(__('Slug')),
                 Forms\Components\Select::make('city_id')
                     ->label('المدينة')
                     ->relationship('city', 'name')
                     ->required()
                     ->reactive(),
-                TextInput::make('slug')
-                    ->label(__('Slug')),
+
 
 
 
@@ -74,12 +74,10 @@ class TripResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('max_people')
                     ->label(__('Max People'))
-                    ->minValue(1)
-                    ->required(),
+                    ->minValue(1),
 
                 DateTimePicker::make('departure_time')
-                    ->label(__('Departure Time'))
-                    ,
+                    ->label(__('Departure Time')),
 
 
                 Forms\Components\Grid::make(2)
@@ -105,7 +103,8 @@ class TripResource extends Resource
                             ->profile('default|simple|full|minimal|none|custom')
                             ->direction('auto|rtl|ltr')
                             ->columnSpan('full')
-                            ->required(),
+                        //->required()
+                        ,
                         TinyEditor::make('highlights')
                             ->label(__('Highlights'))
                             ->fileAttachmentsDisk('public')
@@ -123,7 +122,8 @@ class TripResource extends Resource
                             ->profile('default|simple|full|minimal|none|custom')
                             ->direction('auto|rtl|ltr')
                             ->columnSpan('full')
-                            ->required(),
+                        // ->required()
+                        ,
                         TinyEditor::make('accommodation')
                             ->label(__('Accommodation'))
                             ->fileAttachmentsDisk('public')
@@ -132,7 +132,8 @@ class TripResource extends Resource
                             ->profile('default|simple|full|minimal|none|custom')
                             ->direction('auto|rtl|ltr')
                             ->columnSpan('full')
-                            ->required(),
+                        //  ->required()
+                        ,
                         TinyEditor::make('inclusions')
                             ->label(__('Inclusions'))
                             ->fileAttachmentsDisk('public')
@@ -141,7 +142,8 @@ class TripResource extends Resource
                             ->profile('default|simple|full|minimal|none|custom')
                             ->direction('auto|rtl|ltr')
                             ->columnSpan('full')
-                            ->required(),
+                        //  ->required()
+                        ,
                     ]),
 
                 Forms\Components\TextInput::make('map_link')
