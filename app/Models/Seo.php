@@ -18,6 +18,10 @@ class Seo extends Model
         'title',
         'description',
         'keywords',
+        'og_description',
+        'og_image',
+        'twitter_description',
+        'twitter_image',
     ];
     protected static function booted(): void
     {

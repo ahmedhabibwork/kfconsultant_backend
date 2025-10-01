@@ -21,6 +21,10 @@ class SeoResource extends JsonResource
             'slug' => $this->slug,
             'page_name' => $this->page_name,
             'title' => $this->title,
+            'og_description' => $this->og_description,
+            'og_image' => $this->og_image ? url('storage/' . $this->og_image) : null,
+            'twitter_description' => $this->twitter_description,
+            'twitter_image' => $this->twitter_image ? url('storage/' . $this->twitter_image) : null,
             'description' => $this->description,
             'created_at' => $this->created_at,
         ];
