@@ -99,4 +99,34 @@ class BlogService
             return $this->exceptionFailed($exception);
         }
     }
+    public function getBlogOrTripBySlug($slug)
+    {
+        try {
+            $blog = Blog::where('slug', $slug)->first();
+            if ($blog) {
+                return $this->okResponse(
+                    __('Returned Blog Details successfully'),
+                    [
+                        'latest_blogs' => BlogResource::collection(Blog::latest()->take(3)->get()),
+                        'blog' => new BlogResource(resource: $blog),
+                        'why_choose_us' =>  WhyUs::first(),
+                    ]
+                );
+            }
+
+            $trip = Trip::where('slug', $slug)->first();
+            if ($trip) {
+                return $this->okResponse(
+                    __('Returned Trip Details successfully'),
+                    new TripResource($trip)
+                );
+            }
+
+            return $this->notFoundResponse('No Blog or Trip found for this slug.');
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+
+            return $this->exceptionFailed($exception);
+        }
+    }
 }

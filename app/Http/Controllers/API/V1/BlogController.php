@@ -37,7 +37,10 @@ class BlogController extends Controller
         return $this->blogService->getblogDetails($slug);
     }
 
-
+    public function getBlogOrTripBySlug($slug)
+    {
+        return $this->blogService->getBlogOrTripBySlug($slug);
+    }
     /**
      * Show the form for creating a new resource.
      */
