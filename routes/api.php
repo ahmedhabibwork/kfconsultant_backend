@@ -39,6 +39,8 @@ Route::group([
         Route::get('/blogs/{slug}', [BlogController::class, 'getblogDetails']);
         Route::get('/faqs', [FaqController::class, 'getAllFaqs']);
         Route::get('/tags', [HomeController::class, 'getAllTags']);
+        Route::get('/trip-blog/{slug}', [BlogController::class, 'getBlogOrTripBySlug']);
+        
         // Route::get('/tags/{slug}/trips', [HomeController::class, 'getTagTrips']);
         Route::get('/categories', [CategoryController::class, 'getAllCategories']);
         Route::get('/category/{slug}/sub-categories', [CategoryController::class, 'getSubCategoriesForCategory']);
