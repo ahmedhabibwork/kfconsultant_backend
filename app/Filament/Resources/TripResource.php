@@ -29,16 +29,21 @@ class TripResource extends Resource
 {
     protected static ?string $model = Trip::class;
 
-    protected static ?int $navigationSort = -1;
-    public static function getNavigationGroupSort(): ?int
-    {
-        return -1; // خلي جروب Trips فوق
-    }
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     public static function getNavigationGroup(): ?string
     {
-        return __('Trips');
+        return null;
     }
+
+    // أو لو عايزه في جروب لكن الجروب نفسه يطلع الأول
+    public static function getNavigationGroupSort(): ?int
+    {
+        return -1;
+    }
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // public static function getNavigationGroup(): ?string
+    // {
+    //     return __('Trips');
+    // }
 
     public static function getNavigationLabel(): string
     {
