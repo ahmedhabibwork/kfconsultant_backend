@@ -69,8 +69,8 @@ class BlogResource extends Resource
                     ->visibility('public')
                     ->required()
                     ->imagePreviewHeight('100'),
-
-                RichEditor::make('short_description')
+                    
+                Textarea::make('short_description')
                     ->required()
                     ->label(__('Short Description')),
 
