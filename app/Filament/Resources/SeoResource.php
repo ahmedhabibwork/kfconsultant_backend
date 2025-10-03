@@ -51,6 +51,7 @@ class SeoResource extends Resource
                             ->mapWithKeys(fn($case) => [$case->value => $case->label()])
                             ->toArray()
                     )
+                    ->disabled()
                     ->required(),
                 Grid::make(2)
                     ->schema([
