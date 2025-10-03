@@ -30,6 +30,10 @@ class TripResource extends Resource
     protected static ?string $model = Trip::class;
 
     protected static ?int $navigationSort = -1;
+    public static function getNavigationGroupSort(): ?int
+    {
+        return -1; // خلي جروب Trips فوق
+    }
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     public static function getNavigationGroup(): ?string
     {
