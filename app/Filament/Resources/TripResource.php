@@ -33,7 +33,7 @@ class TripResource extends Resource
     {
         return null;
     }
-    protected static ?int $navigationSort = -10;
+    protected static ?int $navigationSort = 1;
 
     // أو لو عايزه في جروب لكن الجروب نفسه يطلع الأول
     public static function getNavigationGroupSort(): ?int
