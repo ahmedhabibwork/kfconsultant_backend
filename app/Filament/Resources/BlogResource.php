@@ -70,6 +70,9 @@ class BlogResource extends Resource
                     ->required()
                     ->imagePreviewHeight('100'),
 
+                RichEditor::make('short_description')
+                    ->required()
+                    ->label(__('Short Description')),
 
                 TinyEditor::make('description')
                     ->label(__('Description'))
@@ -79,8 +82,7 @@ class BlogResource extends Resource
                     ->profile('default|simple|full|minimal|none|custom')
                     ->direction('auto|rtl|ltr')
                     ->columnSpan('full')
-                    ->required()
-                    ,
+                    ->required(),
                 Textarea::make('meta_title')
                     // ->required()
                     ->label(__('Meta Title')),
