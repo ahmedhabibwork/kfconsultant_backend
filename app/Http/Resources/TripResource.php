@@ -44,7 +44,6 @@ class TripResource extends JsonResource
             'itinerary'       => $this->itinerary,
             'accommodation'   => $this->accommodation,
             'inclusions'      => $this->inclusions,
-
             'duration'        => $this->duration,
             'price'           => $this->price,
             'currency'        => $this->currency,

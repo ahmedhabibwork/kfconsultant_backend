@@ -118,10 +118,12 @@ class BlogService
             if ($trip) {
                 return $this->okResponse(
                     __('Returned Trip Details successfully'),
-                    new TripResource($trip)
+                    [
+                        'trip' => new TripResource($trip),
+                        'popular_trips' => TripResource::collection(Trip::popular()->limit(4)->get()),
+                    ]
                 );
             }
-
             return $this->notFoundResponse('No Blog or Trip found for this slug.');
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
