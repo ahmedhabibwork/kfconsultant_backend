@@ -55,7 +55,7 @@ class TripResource extends JsonResource
             'description'     => $this->description,
             'map_link'        => $this->map_link,
             'rating'          => $this->rating,
-            'is_popular'      => $this->is_popular,
+            //  'is_popular'      => $this->is_popular,
             'is_best_seller'     => $this->is_best_seller,
             'meta_title'      => $this->meta_title,
             'meta_description' => $this->meta_description,
