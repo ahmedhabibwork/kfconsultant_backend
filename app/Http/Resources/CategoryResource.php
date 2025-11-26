@@ -20,11 +20,11 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'title' => $this->title,
-            'description' => $this->description,
-            'image' => $this->image ? url(path: 'storage/' . $this->image) : null,
-            'subCategories' => SubCategoryResource::collection($this->subCategories),
-            'trips' => TripResource::collection($this->trips),
-            'hasTrips' => $this->hasTrips(),
+            // 'description' => $this->description,
+            // 'image' => $this->image ? url(path: 'storage/' . $this->image) : null,
+            // 'subCategories' => SubCategoryResource::collection($this->subCategories),
+            // 'trips' => TripResource::collection($this->trips),
+            // 'hasTrips' => $this->hasTrips(),
             'created_at' => $this->created_at,
         ];
     }

@@ -17,8 +17,8 @@ class Comment extends Model
     ];
 
 
-    public function trip()
+    public function project()
     {
-        return $this->belongsTo(Trip::class);
+        return $this->belongsTo(Project::class);
     }
 }

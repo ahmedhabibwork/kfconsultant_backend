@@ -16,6 +16,8 @@ use App\Http\Controllers\API\V1\SocietyReviewController;
 use App\Http\Controllers\API\V1\EvaluationController;
 use App\Http\Controllers\API\V1\ContestController;
 use App\Http\Controllers\API\V1\HomeController;
+use App\Http\Controllers\API\V1\ProjectController;
+use App\Http\Controllers\API\V1\ServiceController;
 use App\Http\Controllers\API\V1\TripController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redis;
@@ -37,35 +39,30 @@ Route::group([
         Route::get('/about-us', [HomeController::class, 'getAboutUs']);
         Route::get('/blogs', [BlogController::class, 'getAllBlogs']);
         Route::get('/blogs/{slug}', [BlogController::class, 'getblogDetails']);
-        Route::get('/faqs', [FaqController::class, 'getAllFaqs']);
-        Route::get('/tags', [HomeController::class, 'getAllTags']);
-        Route::get('/trip-blog/{slug}', [BlogController::class, 'getBlogOrTripBySlug']);
-        
+        // Route::get('/faqs', [FaqController::class, 'getAllFaqs']);
+        // Route::get('/tags', [HomeController::class, 'getAllTags']);
+        // Route::get('/trip-blog/{slug}', [BlogController::class, 'getBlogOrTripBySlug']);
+
         // Route::get('/tags/{slug}/trips', [HomeController::class, 'getTagTrips']);
         Route::get('/categories', [CategoryController::class, 'getAllCategories']);
-        Route::get('/category/{slug}/sub-categories', [CategoryController::class, 'getSubCategoriesForCategory']);
+       // Route::get('/category/{slug}/sub-categories', [CategoryController::class, 'getSubCategoriesForCategory']);
         Route::get('/category/{slug}', [CategoryController::class, 'show']);
-        Route::get('/category/{slug}/trips', [CategoryController::class, 'getCategoryTrips']);
-        Route::get('/sub-category/{slug}/trips', [CategoryController::class, 'getSubCategoryTrips']);
+       // Route::get('/category/{slug}/projects', [CategoryController::class, 'getCategoryProjects']);
+
+        Route::get('/services', [ServiceController::class, 'getAllServices']);
+        // Route::get('/sub-category/{slug}/trips', [CategoryController::class, 'getSubCategoryTrips']);
         Route::get('/seo', [SeoController::class, 'getAllSeos']);
         Route::get('/seo/{slug}', [SeoController::class, 'getSeo']);
         Route::post('/submit/subscription', [CountactUsController::class, 'submitSubscription']);
         Route::post('/submit/contact-us', [CountactUsController::class, 'submitContactUs']);
-        Route::post('/trip/{slug}/booking', [BookingController::class, 'submitContactUsTrip']);
-        Route::get('/hotel-booking', [BookingController::class, 'hotelBookingOptions']);
-        Route::post('/hotel-booking', [BookingController::class, 'hotelBooking']);
-        Route::get('/transport-booking', [BookingController::class, 'transportBookingOptions']);
-        Route::post('/transport-booking', [BookingController::class, 'transportBooking']);
-        Route::get('/fight-booking', [BookingController::class, 'fightBookingOptions']);
-        Route::post('/fight-booking', [BookingController::class, 'fightBooking']);
-
-        Route::post('/tailor-made-request', [BookingController::class, 'tailorMadeRequest']);
+        Route::get('/form/job-application', [CountactUsController::class, 'getFormJobApplication']);
+        Route::post('/submit/job-application', [CountactUsController::class, 'submitJobApplication']);
     });
 
-    Route::name('trips.')->prefix('trips')->group(function () {
-        Route::get('/search', [TripController::class, 'index']);
-        Route::get('/', [TripController::class, 'index']);
-        Route::get('/{slug}', [TripController::class, 'show']);
+    Route::name('projects.')->prefix('projects')->group(function () {
+        Route::get('/search', [ProjectController::class, 'index']);
+        Route::get('/', [ProjectController::class, 'index']);
+        Route::get('/{slug}', [ProjectController::class, 'show']);
     });
 
     Route::get('/get-point-byslug/{slug}', [PointController::class, 'getPointBySlug']);

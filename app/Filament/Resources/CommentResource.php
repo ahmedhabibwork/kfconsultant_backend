@@ -64,9 +64,9 @@ class CommentResource extends Resource
                     ->rows(5)
                     ->required(),
 
-                Forms\Components\Select::make('trip_id')
-                    ->label(__('Trip'))
-                    ->relationship('trip', 'title') // يفترض عندك عمود title في trips
+                Forms\Components\Select::make('project_id')
+                    ->label(__('Project'))
+                    ->relationship('project', 'title') // يفترض عندك عمود title في trips
                     ->searchable()
                     ->preload()
                     ->nullable(),
@@ -86,8 +86,8 @@ class CommentResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('trip.title')
-                    ->label(__('Trip'))
+                Tables\Columns\TextColumn::make('project.title')
+                    ->label(__('Project'))
                     ->sortable()
                     ->searchable(),
 

@@ -18,6 +18,11 @@ return new class extends Migration
             $table->text('title');
             $table->text('description')->nullable();
             $table->text('keywords')->nullable();
+            $table->text('og_description')->nullable();
+            $table->string('og_image')->nullable();
+            $table->text('twitter_description')->nullable();
+            $table->string('twitter_image')->nullable();
+            
             $table->softDeletes();
             $table->timestamps();
         });

@@ -31,7 +31,7 @@ class DashboardPanelProvider extends PanelProvider
             ->login()
             ->brandLogo(url('/images/logo.svg'))
             ->brandLogoHeight('2.5rem')
-            ->brandName(__('Kemet'))
+            ->brandName(__('KFconsultant'))
             ->favicon(url('/style/assets/img/logo/logo1.png'))
             ->colors([
                 'primary' => Color::Blue,

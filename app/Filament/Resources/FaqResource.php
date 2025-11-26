@@ -19,7 +19,7 @@ class FaqResource extends Resource
 {
 
     protected static ?string $model = Faq::class;
-
+    protected static bool $shouldRegisterNavigation = false;
     //protected static bool $shouldRegisterNavigation = false;
     public static function getNavigationLabel(): string
     {

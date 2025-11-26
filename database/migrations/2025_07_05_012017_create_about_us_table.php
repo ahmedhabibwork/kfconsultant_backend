@@ -14,7 +14,15 @@ return new class extends Migration
         Schema::create('about_us', function (Blueprint $table) {
             $table->id();
             $table->text('title')->nullable();
-            $table->text('description')->nullable();
+            $table->longText('description')->nullable();
+            $table->text('short_description')->nullable();
+            $table->integer('experience_years')->nullable();
+            $table->integer('experts')->nullable();
+            $table->integer('clients')->nullable();
+            $table->integer('projects')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('image')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

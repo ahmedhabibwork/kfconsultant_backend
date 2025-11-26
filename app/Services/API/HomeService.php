@@ -12,10 +12,12 @@ use App\Http\Resources\AboutUsResource;
 use App\Http\Resources\BannerResource;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\CategoryResource as ResourcesCategoryResource;
+use App\Http\Resources\ClientResource;
 use App\Http\Resources\CommentResource;
 use App\Http\Resources\MovementResource;
 use App\Http\Resources\OptionsRangeResource;
 use App\Http\Resources\PointResource;
+use App\Http\Resources\ProjectResource;
 use App\Http\Resources\RangeResource;
 use App\Http\Resources\ReviewResource;
 use App\Http\Resources\ReviewStandardResource;
@@ -29,11 +31,13 @@ use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\City;
+use App\Models\Client;
 use App\Models\Comment;
 use App\Models\ContactInfo;
 use App\Models\Movement;
 use App\Models\OurService;
 use App\Models\Point;
+use App\Models\Project;
 use App\Models\Range;
 use App\Models\Review;
 use App\Models\ReviewStandard;
@@ -60,22 +64,16 @@ class HomeService
     public function home()
     {
         try {
+            $banner = Banner::first();
+            $aboutUs = AboutUs::first();
             return $this->okResponse(
                 __('Returned Home page successfully.'),
                 [
-                    'banner' => new BannerResource(Banner::first()),
-                    'recommended_trips' => TripResource::collection(Trip::bestSaller()->inRandomOrder()->take(8)->get()),
-                    // 'whyUs' => new WhyUsResource(
-                    //     WhyUs::first()
-                    // ),
-                    'luxury_trips' => TripResource::collection(Trip::Join('cities', 'trips.city_id', '=', 'cities.id')->where('cities.slug', 'luxor')->inRandomOrder()->take(8)->get()),
-                    'cairo_trips' => TripResource::collection(Trip::Join('cities', 'trips.city_id', '=', 'cities.id')->where('cities.slug', 'cairo')->inRandomOrder()->take(8)->get()),
-                    'luxury_activities' => TripResource::collection(Trip::Join('cities', 'trips.city_id', '=', 'cities.id')->where('cities.slug', 'luxor')->activity()->inRandomOrder()->take(8)->get()),
-                    'luxury_nile_cruise' => TripResource::collection(Trip::Join('cities', 'trips.city_id', '=', 'cities.id')->where('cities.slug', 'luxor')->nileCruise()->inRandomOrder()->take(8)->get()),
-
-                    'comments' => CommentResource::collection(
-                        Comment::inRandomOrder()->take(8)->get()
-                    ),
+                    'banner' => $banner ? new BannerResource($banner) : null,
+                    'project' => ProjectResource::collection(Project::latest()->take(5)->get()),
+                    'clients' => ClientResource::collection(Client::latest()->get()),
+                    'whyUs' => $aboutUs ? new AboutUsResource($aboutUs) : null,
+                    'services' => ServiceResource::collection(OurService::get()),
                     'blog' => BlogResource::collection(
                         Blog::latest()->take(3)->get()
                     )
@@ -86,6 +84,7 @@ class HomeService
             Log::error('Home endpoint failed: ' . $exception->getMessage(), [
                 'trace' => $exception->getTraceAsString(),
             ]);
+            dd($exception);
 
             return $this->exceptionFailed($exception, __('Failed to load home page.'));
         }
@@ -137,7 +136,7 @@ class HomeService
             return $this->exceptionFailed($exception);
         }
     }
-     public function getTagTrips($slug)
+    public function getTagTrips($slug)
     {
         try {
             $trips = Tag::with('trips')->where('slug', $slug)->trips()->get();
@@ -151,5 +150,4 @@ class HomeService
             return $this->exceptionFailed($exception);
         }
     }
-   
 }

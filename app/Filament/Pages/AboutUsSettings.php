@@ -39,6 +39,9 @@ class AboutUsSettings extends Page implements HasForms
             'description' => $this->about->description,
             'short_description' => $this->about->short_description,
             'experience_years' => $this->about->experience_years,
+            'experts' => $this->about->experts,
+            'clients' => $this->about->clients,
+            'projects' => $this->about->projects,
         ];
 
         $this->form->fill($this->about->toArray());
@@ -68,6 +71,18 @@ class AboutUsSettings extends Page implements HasForms
                             ->required(),
                         Forms\Components\TextInput::make('experience_years')
                             ->label(__('Experience Years'))
+                            ->minValue(1)
+                            ->required(),
+                        Forms\Components\TextInput::make('experts')
+                            ->label(__('Experts'))
+                            ->minValue(1)
+                            ->required(),
+                        Forms\Components\TextInput::make('clients')
+                            ->label(__('Clients'))
+                            ->minValue(1)
+                            ->required(),
+                        Forms\Components\TextInput::make('projects')
+                            ->label(__('Projects'))
                             ->minValue(1)
                             ->required(),
                         Forms\Components\TextInput::make('phone')
@@ -120,6 +135,9 @@ class AboutUsSettings extends Page implements HasForms
                 'description' => ['required', 'string'],
                 'phone' => ['required'],
                 'experience_years' => ['required', 'integer'],
+                'experts' => ['required', 'integer'],
+                'clients' => ['required', 'integer'],
+                'projects' => ['required', 'integer'],
                 'image' => ['required', 'string'],
             ];
 

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('subscriptions', function (Blueprint $table) {
-      $table->id();
-            $table->string('email')->unique(); 
+            $table->id();
+            $table->string('email')->unique();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -21,7 +21,7 @@ class CommentResource extends JsonResource
             'name' => $this->name,
             'comment' => $this->comment,
             'image' => $this->image ? url('storage/' . $this->image) : null,
-            'trip' => $this->trip,
+            'project' => $this->project,
             'created_at' => $this->created_at->format('Y-m-d H:i:s'),
         ];
     }

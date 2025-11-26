@@ -24,7 +24,7 @@ use Filament\Forms\Components\RichEditor;
 class OurServiceResource extends Resource
 {
     protected static ?string $model = OurService::class;
-    protected static bool $shouldRegisterNavigation = false;
+    //protected static bool $shouldRegisterNavigation = false;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function getNavigationGroup(): ?string

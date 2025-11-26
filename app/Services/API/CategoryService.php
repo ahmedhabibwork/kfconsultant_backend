@@ -14,6 +14,7 @@ use App\Http\Resources\CommentResource;
 use App\Http\Resources\MovementResource;
 use App\Http\Resources\OptionsRangeResource;
 use App\Http\Resources\PointResource;
+use App\Http\Resources\ProjectResource;
 use App\Http\Resources\RangeResource;
 use App\Http\Resources\ReviewResource;
 use App\Http\Resources\ReviewStandardResource;
@@ -30,6 +31,7 @@ use App\Models\ContactInfo;
 use App\Models\Movement;
 use App\Models\OurService;
 use App\Models\Point;
+use App\Models\Project;
 use App\Models\Range;
 use App\Models\Review;
 use App\Models\ReviewStandard;
@@ -86,18 +88,18 @@ class CategoryService
 
 
 
-    public function getCategoryTrips($slug)
+    public function getCategoryProjects($slug)
     {
         try {
             $category = Category::where('slug', $slug)->first();
             if (!$category) {
                 return $this->notFoundResponse('Category');
             }
-            $trips = Trip::where('category_id', $category->id)->get();
+            $projects = Project::where('category_id', $category->id)->get();
             return $this->okResponse(
-                __('Returned Home page successfully.'),
+                __('Returned Projects successfully.'),
 
-                TripResource::collection($trips ?? []),
+                ProjectResource::collection($projects ?? []),
 
             );
         } catch (\Exception $exception) {

@@ -18,6 +18,9 @@ class AboutUs extends Model
         'description',
         'image',
         'experience_years',
+        'experts',
+        'clients',
+        'projects',
         'phone',
 
     ];

@@ -48,10 +48,10 @@ class CategoryController extends Controller
 
     public function getCategoryTrips($slug)
     {
-        return $this->categoryService->getCategoryTrips($slug);
+        return $this->categoryService->getCategoryProjects($slug);
     }
-    public function getSubCategoryTrips($slug)
-    {
-        return $this->categoryService->getSubCategoryTrips($slug);
-    }
+    // public function getSubCategoryTrips($slug)
+    // {
+    //     return $this->categoryService->getSubCategoryTrips($slug);
+    // }
 }

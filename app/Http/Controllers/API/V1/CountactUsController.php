@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\ContactUs;
+use App\Models\JobApplication;
 use App\Models\TransportBooking;
 use App\Services\API\CategoryService;
 use App\Services\API\HomeService;
@@ -60,6 +61,35 @@ class CountactUsController extends Controller
             $this->okResponse(__('Trip Booking successfully.'), booking::create($request->all()));
         } catch (\Exception $e) {
             return $this->exceptionFailed($e);
+        }
+    }
+    public function getFormJobApplication()
+    {
+        try {
+            return $this->okResponse(__('success'),  collect(\App\Enums\JobTitleEnum::cases())
+                ->mapWithKeys(fn($case) => [$case->value => $case->label()])
+                ->toArray());
+        } catch (\Exception $e) {
+            dd($e);
+            return $this->exceptionFailed($e->getMessage());
+        }
+    }
+    public function submitJobApplication(JobApplicationRequest $request)
+    {
+        try {
+            $data = $request->all();
+
+            if ($request->hasFile('image')) {
+                $path = $request->file('image')->store('job_applications', 'public');
+                $data['image'] = $path;
+            }
+
+            $jobApplication = JobApplication::create($data);
+
+            return $this->okResponse(__('Add Job Application successfully.'), $jobApplication);
+        } catch (\Exception $e) {
+            dd($e);
+            return $this->exceptionFailed($e->getMessage());
         }
     }
 }

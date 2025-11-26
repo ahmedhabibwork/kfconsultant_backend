@@ -88,14 +88,13 @@ class BlogService
                 [
                     'latest_blogs' => BlogResource::collection(Blog::latest()->take(3)->get()),
                     'blog' => new BlogResource(resource: $blog),
-                    'why_choose_us' =>  WhyUs::first(),
+                    // 'why_choose_us' =>  WhyUs::first(),
                 ]
 
 
             );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-
             return $this->exceptionFailed($exception);
         }
     }

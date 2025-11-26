@@ -24,12 +24,12 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CategoryResource extends Resource
 {
-        protected static bool $shouldRegisterNavigation = false;
+    //  protected static bool $shouldRegisterNavigation = false;
     protected static ?string $model = Category::class;
 
     public static function getNavigationGroup(): ?string
     {
-        return __('Categories');
+        return __('Projects');
     }
 
     public static function getNavigationLabel(): string
@@ -56,23 +56,23 @@ class CategoryResource extends Resource
                 TextInput::make('title')
                     ->required()
                     ->label(__('Title')),
-                FileUpload::make('image')
-                    ->label(__('Image'))
-                    ->image()
-                    ->directory('categories')
-                    ->disk('public')
-                    ->visibility('public')
-                    ->required()
-                    ->imagePreviewHeight('100'),
-                TinyEditor::make('description')
-                    ->label(__('Description'))
-                    ->fileAttachmentsDisk('public')
-                    ->fileAttachmentsVisibility('public')
-                    ->fileAttachmentsDirectory('uploads')
-                    ->profile('default|simple|full|minimal|none|custom')
-                    ->direction('auto|rtl|ltr')
-                    ->columnSpan('full')
-                    ->required(),
+                // FileUpload::make('image')
+                //     ->label(__('Image'))
+                //     ->image()
+                //     ->directory('categories')
+                //     ->disk('public')
+                //     ->visibility('public')
+                //     ->required()
+                //     ->imagePreviewHeight('100'),
+                // TinyEditor::make('description')
+                //     ->label(__('Description'))
+                //     ->fileAttachmentsDisk('public')
+                //     ->fileAttachmentsVisibility('public')
+                //     ->fileAttachmentsDirectory('uploads')
+                //     ->profile('default|simple|full|minimal|none|custom')
+                //     ->direction('auto|rtl|ltr')
+                //     ->columnSpan('full')
+                //     ->required(),
 
             ]);
     }
@@ -87,7 +87,7 @@ class CategoryResource extends Resource
 
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
-                ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
+               // ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
                     ->dateTime('d M, Y H:i:s')
@@ -103,7 +103,7 @@ class CategoryResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                 //   Tables\Actions\DeleteBulkAction::make(),
+                    //   Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

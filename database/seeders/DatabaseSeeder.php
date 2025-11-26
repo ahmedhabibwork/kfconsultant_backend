@@ -4,10 +4,13 @@ namespace Database\Seeders;
 
 use App\Models\Brand;
 use App\Models\City;
+use App\Models\Scale;
 use App\Models\Society;
 use App\Models\User;
+use App\Models\Year;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Artisan;
+use EightyNine\FilamentAdvancedWidget\AdvancedStatsOverviewWidget\Stat;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,7 +24,7 @@ class DatabaseSeeder extends Seeder
         if (User::count() == 0) {
             User::factory()->create([
                 'name' => 'Admin',
-                'email' => 'admin@kemet.com',
+                'email' => 'admin@kfconsultant.com',
                 'password' => Hash::make('12345678'),
                 'phone' => '52345678',
             ]);
@@ -40,11 +43,15 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RolesAndPermissionsSeeder::class,
-                TripsSeeder::class,
-//            AdminUserSeeder::class,
-//            CountriesTableSeeder::class,
-//            DistributorUserSeeder::class,
-//            SupervisorUserSeeder::class,
+            ScalesTableSeeder::class,
+            ScopesTableSeeder::class,
+            StatusesTableSeeder::class,
+            YearsTableSeeder::class,
+
+            //            AdminUserSeeder::class,
+            //            CountriesTableSeeder::class,
+            //            DistributorUserSeeder::class,
+            //            SupervisorUserSeeder::class,
         ]);
     }
 }
