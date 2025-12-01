@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use App\Models\ContactInfo as ModelsContactInfo;
 use Filament\Forms;
+use Filament\Forms\Components\FileUpload;
 use Filament\Pages\Page;
 use Filament\Forms\Form;
 use Filament\Forms\Components\RichEditor;
