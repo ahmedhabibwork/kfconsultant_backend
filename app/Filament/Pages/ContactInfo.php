@@ -63,14 +63,14 @@ class ContactInfo extends Page implements HasForms
                             ->label(__('Map Link'))
                             ->required(),
 
-                        FileUpload::make('map_image')
-                            ->label(__('Map Image'))
-                            ->image()
-                            ->directory('contact-info')
-                            ->disk('public')
-                            ->visibility('public')
-                            ->required()
-                            ->imagePreviewHeight('100'),
+                        // FileUpload::make('map_image')
+                        //     ->label(__('Map Image'))
+                        //     ->image()
+                        //     ->directory('contact-info')
+                        //     ->disk('public')
+                        //     ->visibility('public')
+                        //     ->required()
+                        //     ->imagePreviewHeight('100'),
 
                         // RichEditor::make('description')
                         //     ->label(__('Description'))
@@ -126,7 +126,7 @@ class ContactInfo extends Page implements HasForms
                 'title'       => ['required'],
                 // 'description' => ['required'],
                 'email'       => ['required', 'email'],
-                'map_image'   =>  ['required','string'],
+               // 'map_image'   =>  ['required','string'],
                 'phone1'      => ['required'],
                 'phone2'      => ['required'],
                 'address'     => ['required'],
