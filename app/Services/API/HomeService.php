@@ -74,9 +74,9 @@ class HomeService
                     'clients' => ClientResource::collection(Client::latest()->get()),
                     'whyUs' => $aboutUs ? new AboutUsResource($aboutUs) : null,
                     'services' => ServiceResource::collection(OurService::take(5)->get()),
-                    'blog' => BlogResource::collection(
-                        Blog::latest()->take(3)->get()
-                    )
+                    // 'blog' => BlogResource::collection(
+                    //     Blog::latest()->take(3)->get()
+                    // )
 
                 ]
             );
