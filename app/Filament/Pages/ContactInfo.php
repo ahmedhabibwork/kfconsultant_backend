@@ -66,7 +66,7 @@ class ContactInfo extends Page implements HasForms
                         FileUpload::make('map_image')
                             ->label(__('Map Image'))
                             ->image()
-                            ->directory('about')
+                            ->directory('contact-info')
                             ->disk('public')
                             ->visibility('public')
                             ->required()
@@ -150,6 +150,7 @@ class ContactInfo extends Page implements HasForms
                 ->body(__('Contact Info updated successfully!'))
                 ->send();
         } catch (\Throwable $th) {
+            dd($th);
             Notification::make()
                 ->title(__("We can't save the data, please contact the administrator"))
                 ->danger()
