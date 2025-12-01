@@ -122,7 +122,7 @@ class ContactInfo extends Page implements HasForms
     public function save(): void
     {
         try {
-            $validated = Validator::make($this->data, [
+            $rules = Validator::make($this->data, [
                 'title'       => ['required'],
                 // 'description' => ['required'],
                 'email'       => ['required', 'email'],
@@ -138,11 +138,17 @@ class ContactInfo extends Page implements HasForms
 
             ])->validate();
 
+            $validated = $this->form->getState();
+
+            $validated = validator($validated, $rules)->validate();
+
+            // Convert image array -> string (لو رجعت Array)
+            // if (is_array($validated['image'])) {
+            //     $validated['image'] = collect($validated['image'])->first();
+            // }
+
             $this->contact->update($validated);
             $this->contact->refresh();
-
-            $this->data = $this->contact->toArray();
-            $this->form->fill($this->data);
 
             Notification::make()
                 ->title(__('Saved successfully'))
