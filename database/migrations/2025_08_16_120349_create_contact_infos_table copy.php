@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('contact_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable(); 
-            $table->text('description')->nullable(); 
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
             $table->string('address')->nullable();
             $table->string('phone1')->nullable();
             $table->string('phone2')->nullable();
@@ -23,6 +23,9 @@ return new class extends Migration
             $table->string('instagram_link')->nullable();
             $table->string('whatsapp_number')->nullable();
             $table->string('map_link')->nullable();
+            $table->string('map_image')->nullable();
+            $table->string('linkedin_link')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });
