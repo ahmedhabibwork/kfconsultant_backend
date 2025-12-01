@@ -18,7 +18,12 @@ class ContactInfo extends Model
         'email',
         'facebook_link',
         'instagram_link',
+        'map_image',
+        'linkedin_link',
         'map_link',
         'whatsapp_number',
+    ];
+        protected $casts = [
+        'map_image' => 'string',
     ];
 }

@@ -62,6 +62,15 @@ class ContactInfo extends Page implements HasForms
                             ->label(__('Map Link'))
                             ->required(),
 
+                        FileUpload::make('map_image')
+                            ->label(__('Map Image'))
+                            ->image()
+                            ->directory('about')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->required()
+                            ->imagePreviewHeight('100'),
+
                         // RichEditor::make('description')
                         //     ->label(__('Description'))
                         //     ->required(),
@@ -96,6 +105,10 @@ class ContactInfo extends Page implements HasForms
 
                         Forms\Components\TextInput::make('instagram_link')->required()
                             ->label(__('Instagram Link')),
+                        Forms\Components\TextInput::make('linkedin_link')->required()
+                            ->label(__('Linkedin Link')),
+
+
                     ]),
 
             ]);
@@ -113,12 +126,14 @@ class ContactInfo extends Page implements HasForms
                 'title'       => ['required'],
                 // 'description' => ['required'],
                 'email'       => ['required', 'email'],
+                'map_image'   =>  ['required', 'string'],
                 'phone1'      => ['required'],
                 'phone2'      => ['required'],
                 'address'     => ['required'],
                 'map_link'    => ['required'],
-                'facebook_link' => ['required'],
-                'instagram_link' => ['required'],
+                'facebook_link' => ['nullable'],
+                'instagram_link' => ['nullable'],
+                'linkedin_link' => ['nullable'],
                 'whatsapp_number' => ['required'],
 
             ])->validate();
