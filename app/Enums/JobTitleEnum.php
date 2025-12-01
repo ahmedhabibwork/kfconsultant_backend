@@ -8,6 +8,7 @@ enum JobTitleEnum: string
     case StructuralEngineer = 'Structural Engineer';
     case CivilEngineer = 'Civil Engineer';
 
+
     public function label(): string
     {
         return match ($this) {

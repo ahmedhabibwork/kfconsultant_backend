@@ -73,7 +73,7 @@ class HomeService
                     'project' => ProjectResource::collection(Project::latest()->take(5)->get()),
                     'clients' => ClientResource::collection(Client::latest()->get()),
                     'whyUs' => $aboutUs ? new AboutUsResource($aboutUs) : null,
-                    'services' => ServiceResource::collection(OurService::get()),
+                    'services' => ServiceResource::collection(OurService::take(5)->get()),
                     'blog' => BlogResource::collection(
                         Blog::latest()->take(3)->get()
                     )

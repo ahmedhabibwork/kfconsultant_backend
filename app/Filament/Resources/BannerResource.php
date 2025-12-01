@@ -56,9 +56,9 @@ class BannerResource extends Resource
                     ->required()
                     ->imagePreviewHeight('100'),
 
-                RichEditor::make('description')
-                    ->required()
-                    ->label(__('Description')),
+                // RichEditor::make('description')
+                //     ->required()
+                //     ->label(__('Description')),
             ]);
     }
 
@@ -69,9 +69,10 @@ class BannerResource extends Resource
                 TextColumn::make('id')
                     ->sortable()
                     ->label(__('ID')),
+                ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
+
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
                 // TextColumn::make('description')->label(__('Description'))->limit(50),
-                ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
                 TextColumn::make('created_at')
                     ->label(__('Created At'))
                     ->dateTime('d M, Y H:i:s')

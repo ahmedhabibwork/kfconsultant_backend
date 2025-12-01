@@ -19,9 +19,9 @@ class BannerResource extends JsonResource
 
             'id' => $this->id,
             'title' => $this->title,
-            'description' => $this->description,
+            // 'description' => $this->description,
             'image' => $this->image ? url('storage/' . $this->image) : null,
-            'created_at' => $this->created_at,
+            // 'created_at' => $this->created_at,
         ];
     }
 }
