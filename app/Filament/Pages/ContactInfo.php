@@ -101,12 +101,11 @@ class ContactInfo extends Page implements HasForms
 
                         Forms\Components\TextInput::make('whatsapp_number')->required()
                             ->label(__('Whatsapp Number')),
-                        Forms\Components\TextInput::make('facebook_link')->required()
+                        Forms\Components\TextInput::make('facebook_link')
                             ->label(__('Facebook Link')),
-
-                        Forms\Components\TextInput::make('instagram_link')->required()
+                        Forms\Components\TextInput::make('instagram_link')
                             ->label(__('Instagram Link')),
-                        Forms\Components\TextInput::make('linkedin_link')->required()
+                        Forms\Components\TextInput::make('linkedin_link')
                             ->label(__('Linkedin Link')),
 
 
