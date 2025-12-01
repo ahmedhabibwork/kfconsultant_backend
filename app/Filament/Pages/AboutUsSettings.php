@@ -73,6 +73,10 @@ class AboutUsSettings extends Page implements HasForms
                             ->label(__('Experience Years'))
                             ->minValue(1)
                             ->required(),
+                        Textarea::make('short_description')
+                            ->label(__('Short Description'))
+                            ->maxLength(500)
+                            ->required(),
                         // Forms\Components\TextInput::make('experts')
                         //     ->label(__('Experts'))
                         //     ->minValue(1)
@@ -85,20 +89,17 @@ class AboutUsSettings extends Page implements HasForms
                         //     ->label(__('Projects'))
                         //     ->minValue(1)
                         //     ->required(),
-                        Forms\Components\TextInput::make('phone')
-                            ->label(__('Phone'))
-                            ->required(),
-                        Textarea::make('short_description')
-                            ->label(__('Short Description'))
-                            ->maxLength(500)
-                            ->required(),
+                        // Forms\Components\TextInput::make('phone')
+                        //     ->label(__('Phone'))
+                        //     ->required(),
+
                     ]),
 
                 Forms\Components\Grid::make(1)
                     ->schema([
 
-                        TinyEditor::make('description')
-                            ->label(__('Description'))
+                        TinyEditor::make('mission')
+                            ->label(__('Mission'))
                             ->fileAttachmentsDisk('public')
                             ->fileAttachmentsVisibility('public')
                             ->fileAttachmentsDirectory('uploads')
@@ -106,12 +107,9 @@ class AboutUsSettings extends Page implements HasForms
                             ->direction('auto|rtl|ltr')
                             ->columnSpan('full')
                             ->required(),
-                    ]),
-                Forms\Components\Grid::make(1)
-                    ->schema([
 
-                        FileUpload::make('image')
-                            ->label(__('Image'))
+                        FileUpload::make('mission_image')
+                            ->label(__('Mission Image'))
                             ->image()
                             ->directory('about')
                             ->disk('public')
@@ -120,6 +118,54 @@ class AboutUsSettings extends Page implements HasForms
                             ->imagePreviewHeight('100'),
 
                     ]),
+                Forms\Components\Grid::make(1)
+                    ->schema([
+
+                        TinyEditor::make('vision')
+                            ->label(__('Vision'))
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsVisibility('public')
+                            ->fileAttachmentsDirectory('uploads')
+                            ->profile('default|simple|full|minimal|none|custom')
+                            ->direction('auto|rtl|ltr')
+                            ->columnSpan('full')
+                            ->required(),
+
+
+                        FileUpload::make('vision_image')
+                            ->label(__('Vision Image'))
+                            ->image()
+                            ->directory('about')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->required()
+                            ->imagePreviewHeight('100'),
+
+                    ]),
+                Forms\Components\Grid::make(1)
+                    ->schema([
+
+                        TinyEditor::make('our_founder')
+                            ->label(__('Our Founder'))
+                            ->fileAttachmentsDisk('public')
+                            ->fileAttachmentsVisibility('public')
+                            ->fileAttachmentsDirectory('uploads')
+                            ->profile('default|simple|full|minimal|none|custom')
+                            ->direction('auto|rtl|ltr')
+                            ->columnSpan('full')
+                            ->required(),
+
+                        FileUpload::make('our_founder_image')
+                            ->label(__('Our Founder Image'))
+                            ->image()
+                            ->directory('about')
+                            ->disk('public')
+                            ->visibility('public')
+                            ->required()
+                            ->imagePreviewHeight('100'),
+
+                    ]),
+
             ]);
     }
     public static function canAccess(): bool
@@ -132,13 +178,17 @@ class AboutUsSettings extends Page implements HasForms
             $rules = [
                 'title' => ['required', 'string', 'max:255'],
                 'short_description' => ['required', 'string', 'max:500'],
-                'description' => ['required', 'string'],
-                'phone' => ['required'],
+                'vision' => ['required', 'string'],
+                'mission' => ['required', 'string'],
+                'our_founder' => ['required', 'string'],
+                // 'phone' => ['required'],
                 'experience_years' => ['required', 'integer'],
                 // 'experts' => ['required', 'integer'],
                 // 'clients' => ['required', 'integer'],
                 // 'projects' => ['required', 'integer'],
-                'image' => ['required', 'string'],
+                'mission_image' => ['required', 'string'],
+                'vision_image' => ['required', 'string'],
+                'our_founder_image' => ['required', 'string'],
             ];
 
             // ✅ خد البيانات من الفورم

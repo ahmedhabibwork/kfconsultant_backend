@@ -16,15 +16,21 @@ class AboutUs extends Model
         'title',
         'short_description',
         'description',
-        'image',
         'experience_years',
         'experts',
         'clients',
         'projects',
-        'phone',
+        'mission',
+        'vision',
+        'our_founder',
+        'our_founder_image',
+        'mission_image',
+        'vision_image',
 
     ];
     protected $casts = [
-        'image' => 'string',
+        'our_founder_image' => 'string',
+        'mission_image' => 'string',
+        'vision_image' => 'string',
     ];
 }
