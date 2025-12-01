@@ -126,7 +126,7 @@ class ContactInfo extends Page implements HasForms
                 'title'       => ['required'],
                 // 'description' => ['required'],
                 'email'       => ['required', 'email'],
-                'map_image'   =>  ['required', 'string'],
+                'map_image'   =>  ['required'],
                 'phone1'      => ['required'],
                 'phone2'      => ['required'],
                 'address'     => ['required'],
