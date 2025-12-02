@@ -149,11 +149,11 @@ class ProjectService
             // ✅ Paginate
             $projects = $projectsQuery->paginate($perPage, ['*'], 'page', $currentPage);
             $filters = [
-                'category' => Category::pluck('name', 'slug'),
-                'scale' => Scale::pluck('name', 'slug'),
-                'scope' => Scope::pluck('name', 'slug'),
-                'year' => Year::pluck('name', 'slug'),
-                'status' => Status::pluck('name', 'slug'),
+                'category' => Category::pluck('title', 'slug'),
+                'scale' => Scale::pluck('title', 'slug'),
+                'scope' => Scope::pluck('title', 'slug'),
+                'year' => Year::pluck('title', 'slug'),
+                'status' => Status::pluck('title', 'slug'),
             ];
 
             return $this->paginateResponseWithFilters(ProjectResource::collection($projects), $filters);
