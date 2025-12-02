@@ -35,7 +35,11 @@ use App\Models\Project;
 use App\Models\Range;
 use App\Models\Review;
 use App\Models\ReviewStandard;
+use App\Models\Scale;
+use App\Models\Scope;
+use App\Models\Status;
 use App\Models\Trip;
+use App\Models\Year;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -144,8 +148,15 @@ class ProjectService
 
             // ✅ Paginate
             $projects = $projectsQuery->paginate($perPage, ['*'], 'page', $currentPage);
+            $filters = [
+                'category' => Category::pluck('name', 'slug'),
+                'scale' => Scale::pluck('name', 'slug'),
+                'scope' => Scope::pluck('name', 'slug'),
+                'year' => Year::pluck('name', 'slug'),
+                'status' => Status::pluck('name', 'slug'),
+            ];
 
-            return $this->paginateResponse(ProjectResource::collection($projects));
+            return $this->paginateResponseWithFilters(ProjectResource::collection($projects), $filters);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage(), ['trace' => $exception->getTraceAsString()]);
             dd($exception);
