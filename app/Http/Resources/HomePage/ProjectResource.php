@@ -40,8 +40,8 @@ class ProjectResource extends JsonResource
             // 'year' => new YearResource($this->year),
             // 'owner'        => $this->owner,
             'cover_image' => $this->cover_image ? url('storage/' . $this->cover_image) : null,
-            'meta_title'      => $this->meta_title,
-            'meta_description' => $this->meta_description,
+            // 'meta_title'      => $this->meta_title,
+            // 'meta_description' => $this->meta_description,
         ];
     }
 }
