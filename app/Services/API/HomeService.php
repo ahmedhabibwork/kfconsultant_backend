@@ -1,26 +1,10 @@
 <?php
 
 namespace App\Services\API;;
-
-use App\Enums\CongestionLevelEnum;
-use App\Enums\MovementTypeEnum;
-use App\Enums\RoleTypeEnum;
-
-use App\Filament\Resources\CategoryResource;
-use App\Http\Requests\API\MovementRequest;
 use App\Http\Resources\AboutUsResource;
 use App\Http\Resources\BannerResource;
-use App\Http\Resources\BlogResource;
-use App\Http\Resources\CategoryResource as ResourcesCategoryResource;
 use App\Http\Resources\ClientResource;
-use App\Http\Resources\CommentResource;
-use App\Http\Resources\MovementResource;
-use App\Http\Resources\OptionsRangeResource;
-use App\Http\Resources\PointResource;
-use App\Http\Resources\ProjectResource;
-use App\Http\Resources\RangeResource;
-use App\Http\Resources\ReviewResource;
-use App\Http\Resources\ReviewStandardResource;
+use App\Http\Resources\HomePage\ProjectResource;
 use App\Http\Resources\ServiceResource;
 use App\Http\Resources\TagResource;
 use App\Http\Resources\TeamResource;
@@ -28,23 +12,13 @@ use App\Http\Resources\TripResource;
 use App\Http\Resources\WhyUsResource;
 use App\Models\AboutUs;
 use App\Models\Banner;
-use App\Models\Blog;
-use App\Models\Category;
-use App\Models\City;
 use App\Models\Client;
-use App\Models\Comment;
 use App\Models\ContactInfo;
-use App\Models\Movement;
 use App\Models\OurService;
-use App\Models\Point;
 use App\Models\Project;
-use App\Models\Range;
-use App\Models\Review;
-use App\Models\ReviewStandard;
+
 use App\Models\Tag;
 use App\Models\Team;
-use App\Models\Trip;
-use App\Models\WhyUs;
 use App\Traits\ResponseTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -64,12 +38,12 @@ class HomeService
     public function home()
     {
         try {
-            $banner = Banner::first();
+            $banner = Banner::take(4)->get();
             $aboutUs = AboutUs::first();
             return $this->okResponse(
                 __('Returned Home page successfully.'),
                 [
-                    'banner' => $banner ? new BannerResource($banner) : null,
+                    'banner' => $banner ?  BannerResource::collection($banner) : null,
                     'project' => ProjectResource::collection(Project::latest()->take(5)->get()),
                     'clients' => ClientResource::collection(Client::latest()->get()),
                     'whyUs' => $aboutUs ? new AboutUsResource($aboutUs) : null,
