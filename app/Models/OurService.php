@@ -36,18 +36,18 @@ class OurService extends Model
         });
 
         static::updating(function (OurService $item) {
-            if ($item->isDirty('title')) {
-                $slug = str_replace(' ', '-', $item->title); // Keep Arabic letters
-                $originalSlug = $slug;
-                $counter = 1;
+            // if ($item->isDirty('title')) {
+            $slug = str_replace(' ', '-', $item->title); // Keep Arabic letters
+            $originalSlug = $slug;
+            $counter = 1;
 
-                while (OurService::where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
-                    $slug = $originalSlug . '-' . $counter;
-                    $counter++;
-                }
-
-                $item->slug = $slug;
+            while (OurService::where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
             }
+
+            $item->slug = $slug;
+            //  }
         });
     }
 }
