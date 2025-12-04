@@ -29,7 +29,7 @@ class DashboardPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
-            ->brandLogo(url('/images/logo.svg'))
+            ->brandLogo(url('/images/logo.png'))
             ->brandLogoHeight('2.5rem')
             ->brandName(__('KFconsultant'))
             ->favicon(url('/style/assets/img/logo/logo1.png'))
