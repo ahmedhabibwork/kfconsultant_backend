@@ -27,7 +27,7 @@ class AboutUsResource extends JsonResource
             'our_founder_image' => $this->our_founder ? url('storage/' . $this->our_founder) : null,
             'phone' => $this->phone,
             'experience_years' => $this->experience_years,
-            'image' => $this->image ? url('storage/' . $this->image) : null,
+            // 'image' => $this->image ? url('storage/' . $this->image) : null,
             'created_at' => $this->created_at,
         ];
     }
