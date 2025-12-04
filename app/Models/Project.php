@@ -39,7 +39,52 @@ class Project extends Model
         'meta_description',
     ];
 
+    protected static function booted(): void
+    {
+        static::creating(function (Project $item) {
+            // If slug is empty, generate from title
+            if (empty($item->slug)) {
+                $slug = str_replace(' ', '-', $item->title); // keep Arabic letters
+            } else {
+                $slug = str_replace(' ', '-', $item->slug);
+            }
 
+            $originalSlug = $slug;
+            $counter = 1;
+
+            while (Project::where('slug', $slug)->exists()) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
+            }
+
+            $item->slug = $slug;
+        });
+
+        static::updating(function (Project $item) {
+            // If slug is empty, regenerate from title
+            if (empty($item->slug)) {
+                $slug = str_replace(' ', '-', $item->title);
+            } elseif ($item->isDirty('slug')) {
+                // If slug manually updated
+                $slug = str_replace(' ', '-', $item->slug);
+            } elseif ($item->isDirty('title')) {
+                // If title changed but slug was never manually set
+                $slug = str_replace(' ', '-', $item->title);
+            } else {
+                return; // no change needed
+            }
+
+            $originalSlug = $slug;
+            $counter = 1;
+
+            while (Project::where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
+                $slug = $originalSlug . '-' . $counter;
+                $counter++;
+            }
+
+            $item->slug = $slug;
+        });
+    }
     public function status()
     {
         return $this->belongsTo(Status::class, 'status_id', 'id');
