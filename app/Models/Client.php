@@ -11,7 +11,7 @@ use Str;
 class Client extends Model
 {
     use HasFactory, HasTranslations,  SoftDeletes;
-    public $translatable = ['title'];
+    // public $translatable = ['title'];
     protected $fillable = [
         'title',
         'image',
