@@ -52,8 +52,8 @@ class BlogResource extends Resource
                 TextInput::make('title')
                     ->required()
                     ->label(__('Title')),
-                TextInput::make('slug')
-                    ->label(__('Slug')),
+                // TextInput::make('slug')
+                //     ->label(__('Slug')),
 
                 DateTimePicker::make('published_date')
                     ->label(__('Published Date'))
@@ -109,7 +109,7 @@ class BlogResource extends Resource
                     ->label(__('ID')),
 
                 TextColumn::make('title')->label(__('Title'))->sortable()->searchable(),
-                TextColumn::make('slug')->label(__('Slug'))->sortable()->searchable(),
+                // TextColumn::make('slug')->label(__('Slug'))->sortable()->searchable(),
 
                 ToggleColumn::make('is_published')
                     ->label(__('Is Published?'))

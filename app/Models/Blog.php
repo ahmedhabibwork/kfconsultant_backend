@@ -35,51 +35,35 @@ class Blog extends Model
     {
         return $this->belongsTo(Category::class);
     }
-
     protected static function booted(): void
     {
         static::creating(function (Blog $item) {
-            // If slug is empty, generate from title
-            if (empty($item->slug)) {
-                $slug = str_replace(' ', '-', $item->title); // keep Arabic letters
-            } else {
-                $slug = str_replace(' ', '-', $item->slug);
-            }
-
+            $slug = Str::slug($item->title);
             $originalSlug = $slug;
             $counter = 1;
-
+            // Check if the slug already exists in the database
             while (Blog::where('slug', $slug)->exists()) {
                 $slug = $originalSlug . '-' . $counter;
                 $counter++;
             }
-
+            // Assign the unique slug
             $item->slug = $slug;
         });
 
         static::updating(function (Blog $item) {
-            // If slug is empty, regenerate from title
-            if (empty($item->slug)) {
-                $slug = str_replace(' ', '-', $item->title);
-            } elseif ($item->isDirty('slug')) {
-                // If slug manually updated
-                $slug = str_replace(' ', '-', $item->slug);
-            } elseif ($item->isDirty('title')) {
-                // If title changed but slug was never manually set
-                $slug = str_replace(' ', '-', $item->title);
-            } else {
-                return; // no change needed
+
+            if ($item->isDirty('title')) { // Check if title is being updated
+                $slug = Str::slug($item->title);
+                $originalSlug = $slug;
+                $counter = 1;
+                // Check if the slug already exists, but ignore the current record
+                while (Blog::where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
+                    $slug = $originalSlug . '-' . $counter;
+                    $counter++;
+                }
+                // Assign the unique slug
+                $item->slug = $slug;
             }
-
-            $originalSlug = $slug;
-            $counter = 1;
-
-            while (Blog::where('slug', $slug)->where('id', '!=', $item->id)->exists()) {
-                $slug = $originalSlug . '-' . $counter;
-                $counter++;
-            }
-
-            $item->slug = $slug;
         });
     }
 }
