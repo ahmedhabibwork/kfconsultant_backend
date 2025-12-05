@@ -52,7 +52,7 @@ class BlogResource extends Resource
                 TextInput::make('title')
                     ->required()
                     ->label(__('Title')),
-                // TextInput::make('slug')
+            // TextInput::make('slug')
                 //     ->label(__('Slug')),
 
                 DateTimePicker::make('published_date')

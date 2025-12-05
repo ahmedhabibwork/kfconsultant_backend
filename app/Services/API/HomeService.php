@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services\API;;
+
 use App\Http\Resources\AboutUsResource;
 use App\Http\Resources\BannerResource;
 use App\Http\Resources\ClientResource;
@@ -46,7 +47,7 @@ class HomeService
                     'banner' => $banner ?  BannerResource::collection($banner) : null,
                     'project' => ProjectResource::collection(Project::latest()->take(5)->get()),
                     'clients' => ClientResource::collection(Client::latest()->get()),
-                    'whyUs' => $aboutUs ? new AboutUsResource($aboutUs) : null,
+                    'about_us' => $aboutUs ? new AboutUsResource($aboutUs) : null,
                     'services' => ServiceResource::collection(OurService::take(5)->get()),
                     // 'blog' => BlogResource::collection(
                     //     Blog::latest()->take(3)->get()
