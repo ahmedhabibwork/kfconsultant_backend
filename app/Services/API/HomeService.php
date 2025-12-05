@@ -2,7 +2,7 @@
 
 namespace App\Services\API;;
 
-use App\Http\Resources\HomePage\AboutUsResource;
+use App\Http\Resources\AboutUsResource;
 use App\Http\Resources\BannerResource;
 use App\Http\Resources\ClientResource;
 use App\Http\Resources\HomePage\ProjectResource;
