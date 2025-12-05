@@ -6,7 +6,7 @@ use App\Http\Resources\HomePage\AboutUsResource;
 use App\Http\Resources\BannerResource;
 use App\Http\Resources\ClientResource;
 use App\Http\Resources\HomePage\ProjectResource;
-use App\Http\Resources\ServiceResource;
+use App\Http\Resources\HomePage\ServiceResource;
 use App\Http\Resources\TagResource;
 use App\Http\Resources\TeamResource;
 use App\Http\Resources\TripResource;
