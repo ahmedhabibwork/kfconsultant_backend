@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\HomePage\Resources;
+namespace App\Http\Resources\HomePage;
 
 use App\Models\Society;
 use Illuminate\Http\Resources\Json\JsonResource;
