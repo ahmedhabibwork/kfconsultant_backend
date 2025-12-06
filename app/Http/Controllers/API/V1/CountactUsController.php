@@ -51,6 +51,7 @@ class CountactUsController extends Controller
     }
 
 
+
     public function submitContactUsTrip(BookingRequest $request, $slug)
     {
         try {

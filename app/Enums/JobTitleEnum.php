@@ -12,9 +12,9 @@ enum JobTitleEnum: string
     public function label(): string
     {
         return match ($this) {
-            self::ArchitectEngineer => __('Architect Engineer'),
-            self::StructuralEngineer => __('Structural Engineer'),
-            self::CivilEngineer => __('Civil Engineer'),
+            self::ArchitectEngineer => 'Architect Engineer',
+            self::StructuralEngineer => 'Structural Engineer',
+            self::CivilEngineer => 'Civil Engineer',
         };
     }
 }
