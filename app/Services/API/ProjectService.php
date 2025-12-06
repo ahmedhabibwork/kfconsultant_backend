@@ -74,7 +74,7 @@ class ProjectService
             );
         } catch (\Exception $exception) {
             Log::error($exception->getMessage());
-            dd($exception);
+            // dd($exception);
             return $this->exceptionFailed($exception);
         }
     }
