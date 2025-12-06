@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('contact_infos', function (Blueprint $table) {
-            $table->text('_map_link')->change();
+            $table->text('map_link')->change();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('contact_infos', function (Blueprint $table) {
-            $table->string('_map_link')->change();
+            $table->string('map_link')->change();
         });
     }
 };
