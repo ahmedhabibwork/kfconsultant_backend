@@ -106,30 +106,13 @@ class ProjectService
 
             // ✅ Search filter
             if ($search = $request->query('search')) {
-
-                $searchableColumns = ['title', 'short_description', 'description', 'location', 'owner'];
-
-                $searchableRelations = [
-                    'category' => ['title', 'slug'],
-                    'scope'    => ['title', 'slug'],
-                    'status'   => ['title', 'slug'],
-                ];
-
-                $projectsQuery->where(function ($q) use ($search, $searchableColumns, $searchableRelations) {
-
-                    // Search on main table columns
-                    foreach ($searchableColumns as $column) {
-                        $q->orWhere($column, 'LIKE', "%{$search}%");
-                    }
-
-                    // Search in related models
-                    foreach ($searchableRelations as $relation => $columns) {
-                        $q->orWhereHas($relation, function ($relationQuery) use ($columns, $search) {
-                            foreach ($columns as $column) {
-                                $relationQuery->orWhere($column, 'LIKE', "%{$search}%");
-                            }
-                        });
-                    }
+                $projectsQuery->where(function ($q) use ($search) {
+                    $q->where('title', 'LIKE', "%{$search}%")
+                        ->orWhere('short_description', 'LIKE', "%{$search}%")
+                        ->orWhere('description', 'LIKE', "%{$search}%")
+                        ->orWhere('location', 'LIKE', "%{$search}%")
+                        ->orWhere('owner', 'LIKE', "%{$search}%")
+                    ;
                 });
             }
 
