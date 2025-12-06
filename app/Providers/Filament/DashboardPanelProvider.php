@@ -18,6 +18,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Illuminate\Support\Facades\App;
 
 class DashboardPanelProvider extends PanelProvider
 {
@@ -29,10 +30,17 @@ class DashboardPanelProvider extends PanelProvider
             ->id('dashboard')
             ->path('dashboard')
             ->login()
-            ->brandLogo(url('/images/logo.png'))
-            ->brandLogoHeight('2.5rem')
+
+            //    ->brandLogo(url('/images/logo.png'))
+            // ->brandLogoHeight('2.5rem')
             ->brandName(__('KFconsultant'))
             ->favicon(url('/style/assets/img/logo/logo1.png'))
+            ->renderHook('head.end', function () {
+                $locale = App::getLocale();
+                $recaptchaLang = ($locale === 'ar') ? 'ar' : 'en';
+
+                return '<script src="https://www.google.com/recaptcha/api.js?hl=' . $recaptchaLang . '" async defer></script>';
+            })
             ->colors([
                 'primary' => Color::Blue,
             ])

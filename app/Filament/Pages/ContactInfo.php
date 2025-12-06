@@ -52,13 +52,20 @@ class ContactInfo extends Page implements HasForms
             ->statePath('data')
             ->schema([
 
-
                 Forms\Components\Grid::make(2)
                     ->schema([
 
-                        Forms\Components\TextInput::make('title')
-                            ->label(__('Title'))
-                            ->required(),
+                        Forms\Components\TextInput::make('email')
+                            ->label(__('Email'))->required(),
+                        Forms\Components\Textarea::make('address')->required()
+                            ->label(__('Address')),
+                    ]),
+                Forms\Components\Grid::make(2)
+                    ->schema([
+
+                        // Forms\Components\TextInput::make('title')
+                        //     ->label(__('Title'))
+                        //     ->required(),
                         Forms\Components\TextInput::make('map_link')
                             ->label(__('Map Link'))
                             ->required(),
@@ -77,14 +84,7 @@ class ContactInfo extends Page implements HasForms
                         //     ->required(),
                     ]),
 
-                Forms\Components\Grid::make(2)
-                    ->schema([
 
-                        Forms\Components\TextInput::make('email')
-                            ->label(__('Email'))->required(),
-                        Forms\Components\Textarea::make('address')->required()
-                            ->label(__('Address')),
-                    ]),
 
 
                 Forms\Components\Grid::make(2)
@@ -123,10 +123,10 @@ class ContactInfo extends Page implements HasForms
     {
         try {
             $validated = Validator::make($this->data, [
-                'title'       => ['required'],
+                'title'       => ['nullable'],
                 // 'description' => ['required'],
                 'email'       => ['required', 'email'],
-              //  'map_image'   =>  ['required', 'string'],
+                //  'map_image'   =>  ['required', 'string'],
                 'phone1'      => ['required'],
                 'phone2'      => ['required'],
                 'address'     => ['required'],

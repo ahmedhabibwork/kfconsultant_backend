@@ -9,9 +9,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "arbermustafa/filament-locationpickr-field": "^2.0",
         "amidesfahani/filament-tinyeditor": "^2.1",
+        "arbermustafa/filament-locationpickr-field": "^2.0",
         "bensampo/laravel-enum": "^6.11",
+        "bezhansalleh/filament-language-switch": "^3.1",
         "bezhansalleh/filament-shield": "^3.3",
         "eightynine/filament-advanced-widgets": "^3.0",
         "filament/actions": "^3.3",
