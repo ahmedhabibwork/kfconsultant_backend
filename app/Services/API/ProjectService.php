@@ -66,10 +66,9 @@ class ProjectService
                 __('Returned Trip Details successfully'),
                 [
                     'project' => new ProjectResource($project),
-                    'similar_projects' => new ProjectResource(Project::with(['category', 'scale', 'scope', 'status', 'year'])->orderBy('created_at', 'desc')->
-                    where('category_id', $project->category_id)
-                    ->where('is_active', 1)
-                    ->where('id', '!=', $project->id)->get()),
+                    'similar_projects' =>  ProjectResource::collection(Project::with(['category', 'scale', 'scope', 'status', 'year'])->orderBy('created_at', 'desc')->where('category_id', $project->category_id)
+                        ->where('is_active', 1)
+                        ->where('id', '!=', $project->id)->get()),
 
                 ]
             );
