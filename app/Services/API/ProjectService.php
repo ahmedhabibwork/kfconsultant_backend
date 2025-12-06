@@ -66,7 +66,7 @@ class ProjectService
                 __('Returned Trip Details successfully'),
                 [
                     'project' => new ProjectResource($project),
-
+                    'similar_projects' => new ProjectResource($project),
 
                 ]
             );
