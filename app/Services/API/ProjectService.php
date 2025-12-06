@@ -153,7 +153,7 @@ class ProjectService
             return $this->paginateResponseWithFilters(ProjectResource::collection($projects), $filters);
         } catch (\Exception $exception) {
             Log::error($exception->getMessage(), ['trace' => $exception->getTraceAsString()]);
-            dd($exception);
+            //  dd($exception);
             return $this->exceptionFailed($exception);
         }
     }
