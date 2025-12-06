@@ -113,8 +113,7 @@ class ProjectService
                         ->orWhere('location', 'LIKE', "%{$search}%")
                         ->orWhere('owner', 'LIKE', "%{$search}%")
                         ->orWhereHas('category', fn($q) =>
-                        $q->where('name', 'LIKE', "%{$search}%")
-                            ->orWhere('slug', 'LIKE', "%{$search}%"))
+                        $q->orWhere('slug', 'LIKE', "%{$search}%"))
                         ->orWhereHas('scope', fn($q) =>
                         $q->where('name', 'LIKE', "%{$search}%")
                             ->orWhere('slug', 'LIKE', "%{$search}%"))
