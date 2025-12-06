@@ -16,6 +16,7 @@ use App\Services\API\MovementService;
 use App\Services\API\RangeService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\JobApplicationRequest;
 use App\Models\Blog;
 use App\Models\ContactUs;
 use App\Models\JobApplication;
