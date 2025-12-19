@@ -88,11 +88,11 @@ class ProjectResource extends Resource
                     ->searchable()
                     ->preload(),
 
-                Forms\Components\Select::make('scale_id')
-                    ->relationship('scale', 'title')
-                    ->label(__('Scale'))
-                    ->searchable()
-                    ->preload(),
+                // Forms\Components\Select::make('scale_id')
+                //     ->relationship('scale', 'title')
+                //     ->label(__('Scale'))
+                //     ->searchable()
+                //     ->preload(),
 
                 Forms\Components\TextInput::make('owner')->label(__('Owner'))->maxLength(255),
                 Forms\Components\TextInput::make('location')->label(__('Location'))->maxLength(255),
@@ -142,7 +142,7 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('category.title')->label(__('Category'))->sortable(),
                 Tables\Columns\TextColumn::make('status.title')->label(__('Status'))->sortable(),
                 Tables\Columns\TextColumn::make('scope.title')->label(__('Scope'))->sortable(),
-                Tables\Columns\TextColumn::make('scale.title')->label(__('Scale'))->sortable(),
+               // Tables\Columns\TextColumn::make('scale.title')->label(__('Scale'))->sortable(),
                 Tables\Columns\TextColumn::make('year.title')->label(__('Year'))->sortable(),
                 ToggleColumn::make('is_active')
                     ->label(__('Is Active?'))
