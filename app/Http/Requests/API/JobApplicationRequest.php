@@ -27,7 +27,7 @@ class JobApplicationRequest extends FormRequest
             'email' => 'required|email',
             'phone' => 'required',
             'job_title' => ['required', new Enum(JobTitleEnum::class)],
-            'image' => 'required|image|max:2048',
+            'image' => 'required|max:2048',
         ];
     }
 
