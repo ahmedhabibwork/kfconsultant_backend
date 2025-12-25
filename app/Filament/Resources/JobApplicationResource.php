@@ -108,8 +108,8 @@ class JobApplicationResource extends Resource
     {
         return [
             'index' => Pages\ListJobApplications::route('/'),
-            'create' => Pages\CreateJobApplication::route('/create'),
-            'edit' => Pages\EditJobApplication::route('/{record}/edit'),
+            //'create' => Pages\CreateJobApplication::route('/create'),
+            // 'edit' => Pages\EditJobApplication::route('/{record}/edit'),
         ];
     }
 }
