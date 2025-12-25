@@ -8,6 +8,7 @@ use App\Http\Requests\API\ContactUsRequest;
 use App\Http\Requests\API\MovementRequest;
 use App\Http\Requests\API\SubscriptionRequest;
 use App\Http\Requests\API\TransportBookingRequest;
+use App\Mail\JobApplicationMail;
 use App\Models\booking;
 use App\Models\Subscription;
 use App\Models\Trip;
@@ -17,6 +18,7 @@ use App\Services\API\RangeService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\JobApplicationRequest;
+use App\Mail\ContactUsMail;
 use App\Models\Blog;
 use App\Models\ContactUs;
 use App\Models\JobApplication;
@@ -25,7 +27,7 @@ use App\Services\API\CategoryService;
 use App\Services\API\HomeService;
 use App\Traits\ResponseTrait;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Mail;
 
 class CountactUsController extends Controller
 {
@@ -36,7 +38,19 @@ class CountactUsController extends Controller
     public function submitContactUs(ContactUsRequest $request)
     {
         try {
-            return  $this->okResponse(__('Contact Us successfully.'), ContactUs::create($request->all()));
+            $contact = ContactUs::create($request->validated());
+            try {
+                Mail::to([
+                    'karimfarouk@kfconsultant-eg.com',
+                    'info@kfconsultant-eg.com',
+                    // 'ahmedhabibwork80@gmail.com'
+                ])->send(new ContactUsMail($contact->toArray()));
+            } catch (\Exception $e) {
+
+                logger()->error('ContactUs mail failed: ' . $e->getMessage());
+            }
+
+            return $this->okResponse(__('Contact Us successfully.'), $contact);
         } catch (\Exception $e) {
             return $this->exceptionFailed($e->getMessage());
         }
@@ -87,6 +101,16 @@ class CountactUsController extends Controller
             }
 
             $jobApplication = JobApplication::create($data);
+            try {
+                Mail::to([
+                    'karimfarouk@kfconsultant-eg.com',
+                    'info@kfconsultant-eg.com',
+                 //   'ahmedhabibwork80@gmail.com'
+                ])->send(new JobApplicationMail($jobApplication->toArray()));
+            } catch (\Exception $e) {
+
+                logger()->error('ContactUs mail failed: ' . $e->getMessage());
+            }
 
             return $this->okResponse(__('Add Job Application successfully.'), $jobApplication);
         } catch (\Exception $e) {
