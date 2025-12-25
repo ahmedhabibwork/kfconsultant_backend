@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Tables\Actions\Action;
 use App\Filament\Resources\JobApplicationResource\Pages;
 use App\Filament\Resources\JobApplicationResource\RelationManagers;
 use App\Models\JobApplication;
@@ -57,8 +58,10 @@ class JobApplicationResource extends Resource
                 TextColumn::make('name')->label(__('name'))->sortable()->searchable(),
                 TextColumn::make('phone')->label(__('Phone'))->sortable()->searchable(),
                 TextColumn::make('email')->label(__('Email'))->sortable()->searchable(),
-                   
-                ImageColumn::make('image')->label(__('Image'))->circular()->width(50)->height(50),
+
+                ImageColumn::make('image')->label(__('Image'))
+                    ->url(fn($record) => asset('storage/' . $record->image))
+                    ->circular()->width(50)->height(50),
                 TextColumn::make('job_title')
                     ->label(__('Job Title'))
                     ->sortable()
@@ -80,7 +83,12 @@ class JobApplicationResource extends Resource
                 //     ),
             ])
             ->actions([
-             //   Tables\Actions\EditAction::make(),
+                //   Tables\Actions\EditAction::make(),
+                Action::make('download')
+                    ->label(__('Download'))
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->url(fn($record) => asset('storage/' . $record->image))
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
