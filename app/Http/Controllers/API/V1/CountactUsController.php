@@ -43,7 +43,7 @@ class CountactUsController extends Controller
                 Mail::to([
                     'karimfarouk@kfconsultant-eg.com',
                     // 'info@kfconsultant-eg.com',
-                    'ahmedhabibwork80@gmail.com'
+                    //  'ahmedhabibwork80@gmail.com'
                 ])->send(new ContactUsMail($contact->toArray()));
             } catch (\Exception $e) {
 
@@ -105,7 +105,7 @@ class CountactUsController extends Controller
                 Mail::to([
                     'karimfarouk@kfconsultant-eg.com',
                     // 'info@kfconsultant-eg.com',
-                    'ahmedhabibwork80@gmail.com'
+                    //  'ahmedhabibwork80@gmail.com'
                 ])->send(new JobApplicationMail($jobApplication->toArray()));
             } catch (\Exception $e) {
 
